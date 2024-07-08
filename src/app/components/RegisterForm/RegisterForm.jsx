@@ -13,7 +13,7 @@ const RegsiterForm = () => {
 
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/";
-  console.log(searchParams.get("redirect"));
+
   const {
     createUser,
     loading,
@@ -150,7 +150,7 @@ const RegsiterForm = () => {
                   <p className="text-sm font-light text-white ">
                     have an account?{" "}
                     <Link
-                      href="/login"
+                      href={`/login?redirect=${redirectTo}`}
                       className="font-medium text-primary-600 hover:underline dark:text-primary-500 "
                     >
                       Login

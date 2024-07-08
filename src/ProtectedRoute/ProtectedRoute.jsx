@@ -8,13 +8,15 @@ const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const router = useRouter();
   const pathName = usePathname();
-  console.log(pathName);
 
   useEffect(() => {
+    const formattedURL = `/login?redirect=${window.location.pathname.replace(
+      "/",
+      ""
+    )}`;
+
     if (!loading && !user) {
-      router.push(
-        `/login?redirect=${encodeURIComponent(window.location.pathname)}`
-      );
+      router.push(formattedURL);
     }
   }, [user, loading, router, pathName]);
 

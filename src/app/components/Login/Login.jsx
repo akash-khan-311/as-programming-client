@@ -120,7 +120,7 @@ const Login = () => {
               <p className="text-sm font-light text-white ">
                 Don’t have an account yet?{" "}
                 <Link
-                  href="/register"
+                  href={`/register?redirect=${redirectTo}`}
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500 "
                 >
                   Register
