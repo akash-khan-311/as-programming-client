@@ -7,7 +7,7 @@ const HeroSection = () => {
         <div>
 
             <header className="hero-section">
-                <div className="flex flex-col justify-center items-center  text-white text-center min-h-[calc(115vh)]">
+                <div className="flex flex-col justify-center items-center  text-white text-center min-h-[calc(100vh)]">
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold md:w-3/5 w-full">
                         <TextTyping />
                     </h1>

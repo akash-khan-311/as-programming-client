@@ -4,6 +4,7 @@ import Navbar from "./components/Shared/Navbar";
 import Container from "./components/Shared/Container";
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/Shared/Footer";
+import AuthProvider from "@/Providers/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,12 +17,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        <div className="">
-          <Toaster position="top-center" reverseOrder={true} />
-          {children}
-          <Footer />
-        </div>
+        <AuthProvider>
+          <Navbar />
+          <div className="">
+            <Toaster position="top-center" reverseOrder={true} />
+            {children}
+            <Footer />
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

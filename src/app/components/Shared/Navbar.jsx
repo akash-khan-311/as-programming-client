@@ -4,15 +4,35 @@ import Container from "./Container";
 import Image from "next/image";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { MdDashboard } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ActiveLink from "./ActiveLink";
 
-const Navbar = () => {
-    const [open, setOpen] = useState(false);
-    console.log(open)
 
+
+const Navbar = () => {
+    const [header, setHeader] = useState(false)
+    const [open, setOpen] = useState(false);
+
+    const scrollHandler = () => {
+        if (window.scrollY > 1) {
+            setHeader(true)
+        }
+        else {
+            setHeader(false)
+        }
+    }
+
+
+    useEffect(() => {
+        window.addEventListener('scroll', scrollHandler)
+        return () => {
+            window.addEventListener('scroll', scrollHandler)
+        }
+    }, [])
     return (
-        <nav className=" fixed top-0 z-50 block w-full py-4 mx-auto text-white  border-b shadow-md border-white/80  backdrop-blur-2xl backdrop-saturate-200">
+
+
+        <nav className={`${header && ' w-full backdrop-blur-2xl border-b `'} transition-all durration-500 z-[999] block w-full py-4 mx-auto text-white fixed top-0 `}>
             <Container>
                 <div className="flex items-center justify-between text-blue-gray-900">
                     <Link href="/" className="cursor-pointer py-1.5 font-sans flex items-center text-base font-semibold leading-relaxed tracking-normal text-inherit antialiased">
@@ -62,6 +82,8 @@ const Navbar = () => {
                 </div>
             </Container>
         </nav >
+
+
 
     )
 }
