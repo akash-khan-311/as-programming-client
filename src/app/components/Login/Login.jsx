@@ -8,23 +8,29 @@ import { useForm } from "react-hook-form";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
 import toast from "react-hot-toast";
+import { FadeLoader, PulseLoader } from "react-spinners";
 
 const Login = () => {
-  const { loading, setLoading, googleSignIn, user } = useAuth();
+  const { loading, Login, setLoading, googleSignIn, user } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/";
   const pathname = usePathname();
-  console.log(pathname);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const submitForm = (formData) => {
-    console.log(formData);
+  const submitForm = async (formData) => {
+    try {
+      const result = await Login(formData.email, formData.password);
+      if (result?.user) {
+        toast.success("🦄 Login Successful");
+        router.push(redirectTo);
+      }
+    } catch (error) {}
   };
 
   const handleGoogleLogin = async () => {
@@ -39,7 +45,7 @@ const Login = () => {
   };
 
   if (user && pathname === "/login") {
-    toast.success("😒 You are Already Loged In");
+    // toast.success("😒 You are Already Loged In");
     router.push(redirectTo);
   }
 
@@ -115,7 +121,7 @@ const Login = () => {
                 type="submit"
                 className="btn text-white font-semibold w-full"
               >
-                Login
+                {loading ? <PulseLoader size={5} color="#FFFFFF" /> : "Login"}
               </button>
               <p className="text-sm font-light text-white ">
                 Don’t have an account yet?{" "}

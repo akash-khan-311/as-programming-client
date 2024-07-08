@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
+import Loader from "@/app/components/Shared/Loader";
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -21,7 +22,7 @@ const ProtectedRoute = ({ children }) => {
   }, [user, loading, router, pathName]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return user ? <>{children}</> : router.push("/login");
