@@ -45,9 +45,9 @@ const Accordion = () => {
                                 onClick={() => handleToogle(i)}
                                 className="w-full flex items-center justify-between font-medium px-6 py-4"
                             >
-                                <div className='flex items-center gap-5'>
-                                    <span className='text-4xl text-pink-500'>{accordion.icon}</span>
-                                    <span className='text-xl'>{accordion.title}</span>
+                                <div className='flex items-center gap-x-2'>
+                                    <span className='text-xl md:text-xl text-pink-500'>{accordion.icon}</span>
+                                    <span className='text-sm md:text-lg text-left'>{accordion.title}</span>
                                 </div>
 
                                 <svg

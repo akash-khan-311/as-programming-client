@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
   background: url("/bg-jpg.jpg"),
     linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
@@ -11,18 +12,18 @@ body {
   background-attachment: fixed;
 
   height: 100vh;
+  overflow-x: hidden;
 }
+
 section {
   padding: 80px 0;
 }
 
 .btn {
-  background-image: linear-gradient(
-    to right,
-    #aa076b 0%,
-    #61045f 51%,
-    #aa076b 100%
-  );
+  background-image: linear-gradient(to right,
+      #aa076b 0%,
+      #61045f 51%,
+      #aa076b 100%);
   padding: 10px 45px;
   border-radius: 5px;
   text-align: center;
@@ -33,7 +34,8 @@ section {
 }
 
 .btn:hover {
-  background-position: right center; /* change the direction of the change here */
+  background-position: right center;
+  /* change the direction of the change here */
   color: #fff;
   text-decoration: none;
 }

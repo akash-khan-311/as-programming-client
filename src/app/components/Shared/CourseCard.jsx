@@ -1,12 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FaBookOpen, FaDollarSign } from "react-icons/fa";
 
 const CourseCard = ({ data }) => {
 
-    const { img, name, description, price, duration, } = data;
+    const { img, name, description, price, id, } = data;
     return (
-        <div className="relative flex backdrop-blur-xl  flex-col rounded-xl bg-white/30 text-white shadow-md">
-            <div className="relative mx-4 mt-6  h-56 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
+        <div className="relative flex backdrop-blur-xl min-h-[500px] flex-col rounded-xl bg-white/30 text-white shadow-md">
+            <div className="relative mx-4 mt-4  h-56 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
                 <Image
                     src={img}
                     alt="img-blur-shadow"
@@ -29,18 +30,9 @@ const CourseCard = ({ data }) => {
                     </span>
                     <p className="">Price : {price}</p>
                 </div>
-                <div className="flex flex-1 items-center pl-6">
-                    <span className="text-xl ">
-                        <FaBookOpen />
-                    </span>
-                    <p className=" ml-2">Credit {duration}hr</p>
-                </div>
+
             </div>
-            {/* <div className="p-6 w-full flex items-end overflow-hidden ">
-          <button onClick={() => handleSelected(course)} className="sign w-full ">
-            select
-          </button>
-        </div> */}
+            <Link className="btn my-6 mx-6 text-sm" href={`/courses/${id}`}>View Details</Link>
         </div>
     )
 }

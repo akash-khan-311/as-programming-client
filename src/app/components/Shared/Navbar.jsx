@@ -5,13 +5,14 @@ import Image from "next/image";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { MdDashboard } from "react-icons/md";
 import { useState } from "react";
+import ActiveLink from "./ActiveLink";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
     console.log(open)
 
     return (
-        <nav className=" sticky top-0 z-50 block w-full py-4 mx-auto text-white  border-b shadow-md border-white/80  backdrop-blur-2xl backdrop-saturate-200">
+        <nav className=" fixed top-0 z-50 block w-full py-4 mx-auto text-white  border-b shadow-md border-white/80  backdrop-blur-2xl backdrop-saturate-200">
             <Container>
                 <div className="flex items-center justify-between text-blue-gray-900">
                     <Link href="/" className="cursor-pointer py-1.5 font-sans flex items-center text-base font-semibold leading-relaxed tracking-normal text-inherit antialiased">
@@ -19,22 +20,17 @@ const Navbar = () => {
                     </Link>
                     <div className="hidden lg:block">
                         <ul className="flex flex-col gap-2 my-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-                            <li className="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-                                <Link href="/" className="flex items-center transition-colors hover:text-blue-500">
-                                    Home
-                                </Link>
+                            <li className="block p-1 font-sans text-lg antialiased font-medium leading-normal text-blue-gray-900">
+                                <ActiveLink path="/">Home</ActiveLink>
                             </li>
-                            <li className="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-                                <Link href="/" className="flex items-center transition-colors hover:text-blue-500">
-                                    Courses
-                                </Link>
+                            <li className="block p-1 font-sans text-lg antialiased font-medium leading-normal text-blue-gray-900">
+                                <ActiveLink path="/courses">Courses</ActiveLink>
                             </li>
-                            <li className="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-                                <Link href="/" className="flex items-center transition-colors hover:text-blue-500">
-                                    Be a Instructor
-                                </Link>
+                            <li className="block p-1 font-sans text-lg antialiased font-medium leading-normal text-blue-gray-900">
+                                <ActiveLink path="/teach">Be a Instructor</ActiveLink>
+
                             </li>
-                            <li onClick={() => setOpen(!open)} className="relative block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
+                            <li onClick={() => setOpen(!open)} className="relative block p-1 font-sans text-lg antialiased font-medium leading-normal text-blue-gray-900">
 
                                 <Image className=" rounded-full cursor-pointer" src={'/avatar.png'} width={30} height={30} alt="Rounded avatar" />
 
@@ -46,7 +42,7 @@ const Navbar = () => {
                                                 <MdDashboard className="text-lg" /> <span className="text-lg ml-2">Dashboard</span>
                                             </Link>
                                         </li>
-                                        <li className=" hover:bg-red-100 p-1 font-sans text-sm antialiased font-medium  tw-full pt-[9px] pb-2 px-3 text-start leading-tight cursor-pointer select-none transition-all hover:bg-opacity-80 focus:bg-opacity-80 active:bg-opacity-80 hover:text-blue-gray-900 focus:text-blue-gray-900 active:text-blue-gray-900 outline-none flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10 mb-3">
+                                        <li className=" hover:bg-red-100 p-1 font-sans text-lg antialiased font-medium  tw-full pt-[9px] pb-2 px-3 text-start leading-tight cursor-pointer select-none transition-all hover:bg-opacity-80 focus:bg-opacity-80 active:bg-opacity-80 hover:text-blue-gray-900 focus:text-blue-gray-900 active:text-blue-gray-900 outline-none flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10 mb-3">
                                             <button className="flex gap-x-2 text-red-500 items-center transition-colors ">
                                                 <RiLogoutCircleLine className="text-lg" /> <span className="text-lg ml-2">Logout</span>
                                             </button>
