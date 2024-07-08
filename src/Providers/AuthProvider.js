@@ -1,3 +1,4 @@
+"use client";
 import { AuthContext } from "@/context";
 import app from "@/firebase/firebase.config";
 import {
@@ -41,6 +42,7 @@ const AuthProvider = ({ children }) => {
 
     // Logout
     const logOut = () => {
+        toast.success("Logout Success");
         return auth.signOut();
     };
 

@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Shared/Navbar";
-import Container from "./components/Shared/Container";
+
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/Shared/Footer";
 import AuthProvider from "@/Providers/AuthProvider";
@@ -19,11 +19,11 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <AuthProvider>
           <Navbar />
-          <div className="">
-            <Toaster position="top-center" reverseOrder={true} />
+          <div className="min-h-[calc(100vh-268px)]">
+            <Toaster position="top-center" />
             {children}
-            <Footer />
           </div>
+          <Footer />
         </AuthProvider>
       </body>
     </html>
