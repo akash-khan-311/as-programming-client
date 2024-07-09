@@ -20,10 +20,10 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <AuthProvider>
           <Navbar />
-          <div className="min-h-[calc(100vh-268px)]">
+          <main className="min-h-[calc(100vh-268px)]">
             <Toaster position="top-center" />
             {children}
-          </div>
+          </main>
           <Footer />
         </AuthProvider>
       </body>

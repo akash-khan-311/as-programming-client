@@ -1,3 +1,4 @@
+import Sidebar from "@/components/Dashboard/Sidebar/Sidebar";
 import ProtectedRoute from "@/ProtectedRoute/ProtectedRoute";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
@@ -13,8 +14,11 @@ export default function DashboardLayout({ children }) {
   return (
     <section className={inter.className}>
       <ProtectedRoute>
+        <Sidebar />
         <Toaster />
-        {children}
+        <div className="flex-1  md:ml-64">
+          <div className="p-5">{children}</div>
+        </div>
       </ProtectedRoute>
     </section>
   );

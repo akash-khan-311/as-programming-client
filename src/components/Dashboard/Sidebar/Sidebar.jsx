@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 // Components
 
@@ -6,18 +7,14 @@ import { GrLogout } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";
 import { AiOutlineBars } from "react-icons/ai";
 
-import ToggleButton from "../../Button/ToggleButton";
-import useAuth from "../../../hooks/useAuth";
-import useRole from "../../../hooks/useRole";
-import GuestMenu from "../Menu/GuestMenu";
-import HostMenu from "../Menu/HostMenu";
-import AdminMenu from "../Menu/AdminMenu";
+import useAuth from "@/hooks/useAuth";
+import Image from "next/image";
+import StudentMenu from "../Menu/StudentMenu";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
   const [toggle, setToggle] = useState(false);
   const [isActive, setActive] = useState(false);
-  const [role] = useRole();
 
   //   For guest/host menu item toggle button
   const toggleHandler = (event) => {
@@ -30,10 +27,11 @@ const Sidebar = () => {
   return (
     <>
       {/* Small Screen Navbar */}
-      <div className="bg-gray-100 text-gray-800 flex justify-between md:hidden">
+      <div className="  text-gray-800 flex justify-between md:hidden">
         <div>
           <div className="block cursor-pointer p-4 font-bold">
-            {/* <Logo /> */}
+            <Image src={"/logo.png"} alt="logo" width={100} height={100} />
+            <span>Programming</span>
           </div>
         </div>
 
@@ -46,37 +44,43 @@ const Sidebar = () => {
       </div>
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden backdrop-blur-md bg-white/10 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
         }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
           <div>
-            <div className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-rose-100 mx-auto">
-              {/* <Logo /> */}
+            <div className="w-full hidden md:flex items-center px-4 py-2 shadow-lg rounded-lg justify-center  mx-auto">
+              <Image src={"/logo.png"} alt="logo" width={50} height={50} />
+              <span className="text-xl text-white font-bold">Programming</span>
             </div>
           </div>
 
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6 ">
-            {/* If a user is host */}
+            {/* <MenuItems /> */}
+            <nav>
+              <StudentMenu />
+            </nav>
+            {/* If a user is host
             {role === "host" && <ToggleButton toggleHandler={toggleHandler} />}
+
             <nav>
               {role === "guest" && <GuestMenu />}
               {role === "host" ? toggle ? <HostMenu /> : <GuestMenu /> : ""}
               {role === "admin" && <AdminMenu />}
-            </nav>
+            </nav> */}
           </div>
         </div>
 
         <div>
           <hr />
 
-          <MenuItem
+          {/* <MenuItem
             icon={FcSettings}
             label="Profile"
             address="/dashboard/profile"
-          />
+          /> */}
           <button
             onClick={logOut}
             className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform"
