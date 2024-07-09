@@ -1,6 +1,6 @@
+import Container from "@/components/Shared/Container";
 import Image from "next/image";
 import Link from "next/link";
-import Container from "../../Container";
 
 const BeInstructor = () => {
   return (

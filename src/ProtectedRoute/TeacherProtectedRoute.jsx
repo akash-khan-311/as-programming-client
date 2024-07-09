@@ -12,7 +12,7 @@ const TeacherProtectedRoute = ({ children }) => {
   useEffect(() => {
     if (!loading) {
       if (!user || user.role !== "teacher") {
-        router.push("/profile"); // Redirect to profile if not a teacher
+        router.push("/dasboard/profile"); // Redirect to profile if not a teacher
       }
     }
   }, [user, loading, router]);

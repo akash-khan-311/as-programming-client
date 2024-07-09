@@ -1,7 +1,7 @@
+import ProtectedRoute from "@/ProtectedRoute/ProtectedRoute";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import AuthProvider from "@/Providers/AuthProvider";
-import ProtectedRoute from "@/ProtectedRoute/ProtectedRoute";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -11,17 +11,11 @@ export const metadata = {
 
 export default function DashboardLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ProtectedRoute>
-          <AuthProvider>
-            <div className="min-h-[calc(100vh-268px)]">
-              <Toaster position="top-center" />
-              {children}
-            </div>
-          </AuthProvider>
-        </ProtectedRoute>
-      </body>
-    </html>
+    <section className={inter.className}>
+      <ProtectedRoute>
+        <Toaster />
+        {children}
+      </ProtectedRoute>
+    </section>
   );
 }

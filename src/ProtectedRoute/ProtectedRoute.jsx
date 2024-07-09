@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
-import Loader from "@/app/components/Shared/Loader";
+import Loader from "@/components/Shared/Loader";
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();

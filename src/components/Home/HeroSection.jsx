@@ -1,6 +1,6 @@
 import Link from "next/link";
 import TextTyping from "./TextTyping";
-import HeroSectionButtons from "../../Buttons/HeroSectionButtons";
+import HeroSectionButtons from "../Buttons/HeroSectionButtons";
 
 const HeroSection = () => {
   return (

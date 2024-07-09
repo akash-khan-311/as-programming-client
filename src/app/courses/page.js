@@ -1,5 +1,5 @@
+import Container from "@/components/Shared/Container";
 import ProtectedRoute from "@/ProtectedRoute/ProtectedRoute";
-import Container from "../components/Shared/Container";
 
 const CoursesPage = () => {
   return (

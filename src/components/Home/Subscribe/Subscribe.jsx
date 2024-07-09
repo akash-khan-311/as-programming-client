@@ -1,7 +1,6 @@
 "use client";
 
 import toast from "react-hot-toast";
-import Container from "../../Container";
 
 const Subscribe = () => {
   const handleSubscribe = (e) => {
@@ -14,24 +13,17 @@ const Subscribe = () => {
     }
   };
   return (
-
     <section className="backdrop-blur-xl bg-white/10 my-10">
       <div className=" px-4 mx-auto max-w-screen-xl  lg:px-6">
         <div className="mx-auto max-w-screen-md sm:text-center">
-          <h2
-
-            className="mb-4 text-5xl text-center tracking-tight font-extrabold text-white stroke  "
-          >
+          <h2 className="mb-4 text-5xl text-center tracking-tight font-extrabold text-white stroke  ">
             Subscribe to our Newsletter for latest news.
           </h2>
           <p className="mx-auto mb-8 max-w-2xl font-light text-gray-300 md:mb-12 sm:text-xl text-center">
             Stay up to date with the roadmap progress, announcements and
             exclusive discounts feel free to sign up with your email.
           </p>
-          <form
-
-            onSubmit={handleSubscribe}
-          >
+          <form onSubmit={handleSubscribe}>
             <div className="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
               <div className="relative w-full">
                 <label
@@ -83,7 +75,6 @@ const Subscribe = () => {
         </div>
       </div>
     </section>
-
   );
 };
 
