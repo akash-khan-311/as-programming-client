@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
 import toast from "react-hot-toast";
-import { FadeLoader, PulseLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 
 const Login = () => {
   const { loading, Login, setLoading, googleSignIn, user } = useAuth();

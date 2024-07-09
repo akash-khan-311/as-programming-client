@@ -8,12 +8,19 @@ import { useEffect, useState } from "react";
 import ActiveLink from "./ActiveLink";
 import useAuth from "@/hooks/useAuth";
 import Dropdown from "./DropdownMenu";
+import { usePathname } from "next/navigation";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [header, setHeader] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isDashboard = pathname.startsWith("/dashboard");
 
+  console.log();
+  // console.log(pathname);
+  // console.log(isDashboard);
   const scrollHandler = () => {
     if (window.scrollY > 1) {
       setHeader(true);
@@ -32,17 +39,13 @@ const Navbar = () => {
     <nav
       className={`${
         header && " w-full backdrop-blur-2xl border-b bg-black/50  `"
+      } ${
+        isDashboard ? "hidden " : ""
       } transition-all durration-500 z-[999] block w-full py-2 mx-auto text-white fixed top-0 `}
     >
       <Container>
-        <div className="flex items-center justify-between  w-full">
-          <Link
-            href="/"
-            className="cursor-pointer py-1.5 font-sans flex items-center text-base font-semibold leading-relaxed tracking-normal text-inherit antialiased"
-          >
-            <Image src={"/logo.png"} width={50} height={50} alt="AS Logo" />{" "}
-            <span className="ml-2 text-3xl">Programming</span>
-          </Link>
+        <nav className="flex items-center justify-between  w-full">
+          <Logo className={"w-10 h-10 py-2 "} />
           <div className="hidden lg:block">
             <ul className="flex flex-col gap-2 my-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
               <li className="block p-1 font-sans text-lg antialiased font-medium leading-normal text-blue-gray-900">
@@ -110,7 +113,7 @@ const Navbar = () => {
           </div>
 
           <Dropdown />
-        </div>
+        </nav>
       </Container>
     </nav>
   );

@@ -5,16 +5,20 @@ import BestCourse from "@/components/Home/BestCourse/BestCourse";
 import Features from "@/components/Home/Features/Features";
 import HeroSection from "@/components/Home/HeroSection";
 import Subscribe from "@/components/Home/Subscribe/Subscribe";
+import Loader from "@/components/Shared/Loader";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
-    <>
-      <HeroSection />
-      <Features />
-      <About />
-      <BestCourse />
-      <BeInstructor />
-      <Subscribe />
-    </>
+    <Suspense fallback={<Loader />}>
+      <>
+        <HeroSection />
+        <Features />
+        <About />
+        <BestCourse />
+        <BeInstructor />
+        <Subscribe />
+      </>
+    </Suspense>
   );
 }

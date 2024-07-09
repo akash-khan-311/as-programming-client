@@ -1,7 +1,7 @@
 const ProfilePage = () => {
   return (
     <section className="">
-      <div className="">Welcome to ProfilePage</div>
+      <div className="text-6xl text-white">Welcome to ProfilePage</div>
     </section>
   );
 };

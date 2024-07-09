@@ -8,9 +8,9 @@ const Loader = ({ smallHeight }) => {
       flex 
       flex-col 
       justify-center 
-      items-center `}
+      items-center absolute left-1/2`}
     >
-      <ScaleLoader size={100} color="red" />
+      <ScaleLoader size={100} color="#FF1493" />
     </div>
   );
 };

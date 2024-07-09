@@ -10,6 +10,8 @@ import { AiOutlineBars } from "react-icons/ai";
 import useAuth from "@/hooks/useAuth";
 import Image from "next/image";
 import StudentMenu from "../Menu/StudentMenu";
+import Link from "next/link";
+import Logo from "@/components/Shared/Logo";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
@@ -27,19 +29,14 @@ const Sidebar = () => {
   return (
     <>
       {/* Small Screen Navbar */}
-      <div className="  text-gray-800 flex justify-between md:hidden">
-        <div>
-          <div className="block cursor-pointer p-4 font-bold">
-            <Image src={"/logo.png"} alt="logo" width={100} height={100} />
-            <span>Programming</span>
-          </div>
-        </div>
+      <div className="  text-gray-100 flex justify-between md:hidden">
+        <div>{/* <Logo /> */}</div>
 
         <button
           onClick={handleToggle}
-          className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-200"
+          className="absolute right-0 top-0 p-4 focus:outline-none "
         >
-          <AiOutlineBars className="h-5 w-5" />
+          <AiOutlineBars className="h-8 w-8" />
         </button>
       </div>
       {/* Sidebar */}
@@ -49,11 +46,8 @@ const Sidebar = () => {
         }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
-          <div>
-            <div className="w-full hidden md:flex items-center px-4 py-2 shadow-lg rounded-lg justify-center  mx-auto">
-              <Image src={"/logo.png"} alt="logo" width={50} height={50} />
-              <span className="text-xl text-white font-bold">Programming</span>
-            </div>
+          <div className="shadow-xl shadow-white/10 rounded-xl py-3">
+            <Logo className={"w-10 h-10 ml-3"} />
           </div>
 
           {/* Nav Items */}
