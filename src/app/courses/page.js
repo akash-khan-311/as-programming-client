@@ -1,17 +1,27 @@
+import { getAllCourses } from "@/api/courses";
 import Container from "@/components/Shared/Container";
-import ProtectedRoute from "@/ProtectedRoute/ProtectedRoute";
+import CourseCard from "@/components/Shared/CourseCard";
 
-const CoursesPage = () => {
+const CoursesPage = async () => {
+  const courses = await getAllCourses();
+  console.log(courses);
   return (
-    <ProtectedRoute>
-      <section className="">
-        <Container>
-          <h1 className="text-6xl text-center my-20 font-bold">
-            This is route
+    <section className="">
+      <Container>
+        <div>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl my-6 text-center  font-bold">
+            Explore Our Courses
           </h1>
-        </Container>
-      </section>
-    </ProtectedRoute>
+        </div>
+
+        {/* Courses List */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8">
+          {courses.map((course) => (
+            <CourseCard key={course._id} data={course} />
+          ))}
+        </div>
+      </Container>
+    </section>
   );
 };
 export default CoursesPage;

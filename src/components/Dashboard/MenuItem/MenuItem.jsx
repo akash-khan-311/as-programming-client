@@ -9,8 +9,10 @@ const MenuItem = ({ label, path, icon: Icon }) => {
     <Link
       href={path}
       end
-      className={`flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
-        isActive ? "bg-gray-300  text-gray-700" : "text-gray-600"
+      className={`flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:backdrop-blur-sm hover:bg-white/10   hover:text-gray-100 ${
+        isActive
+          ? "backdrop-blur-sm bg-white/10 text-gray-100"
+          : "text-gray-100"
       }`}
     >
       <Icon className="w-5 h-5" />

@@ -138,8 +138,12 @@ const courses = [
   },
 ];
 
-export const getAllCourse = () => {
+export const getAllCourse = async () => {
   return courses;
+};
+
+export const getCourseById = async (id) => {
+  return courses.find((course) => course.id === id);
 };
 
 export const getOnly6Courses = () => {

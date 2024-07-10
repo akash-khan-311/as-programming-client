@@ -7,7 +7,7 @@ const HeroSectionButtons = () => {
   const { user } = useAuth();
   return (
     <div className="flex gap-3 my-2">
-      <Link href="/signup">
+      <Link href="/courses">
         <button className=" btn transition-all duration-300 px-5 py-1">
           Courses
         </button>
