@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import useAuth from "@/hooks/useAuth";
 
 import { useRouter, useSearchParams, redirect } from "next/navigation";
+import { getToken, saveUser } from "@/api/auth";
+import toast from "react-hot-toast";
 
 const RegsiterForm = () => {
   const router = useRouter();
@@ -35,8 +37,24 @@ const RegsiterForm = () => {
     try {
       const result = await createUser(formData.email, formData.password);
       await updateUserProfile(formData.name);
+      // Save user in database
+      await saveUser(result?.user);
+
+      // Get Token
+      const token = await getToken(result?.user?.email);
+      if (!token) {
+        toast.error("🦄 Login Failed");
+        return;
+      }
+
+      // Redirect
+      router.push(redirectTo);
+      toast.success("🦄 Register Successful");
       console.log(result);
     } catch (error) {
+      if (error.message.includes("email-already-in-use")) {
+        toast.error("🦄 Email Already In Use");
+      }
       console.log(error.message);
     } finally {
       setLoading(false);
@@ -46,13 +64,22 @@ const RegsiterForm = () => {
   const handleGoogleLogin = async () => {
     try {
       const result = await googleSignIn();
+      // Save user data to the database
+      await saveUser(result?.user);
+      // Get Token
+      await getToken(result?.user?.email);
+      // Redirect
       router.push(redirectTo);
+      toast.success("🦄 Google Sing In Successful");
     } catch (error) {
       console.log(error.message);
     } finally {
       setLoading(false);
     }
   };
+  if (user) {
+    return router.push("/");
+  }
 
   return (
     <>
@@ -143,7 +170,7 @@ const RegsiterForm = () => {
                   </div>
                   <button
                     type="submit"
-                    className="btn text-white font-semibold w-full"
+                    className="btn py-2 text-white font-semibold w-full"
                   >
                     {loading ? "Loading..." : "Register"}
                   </button>

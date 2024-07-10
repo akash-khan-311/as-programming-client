@@ -1,6 +1,7 @@
 import { Suspense } from "react";
-import RegsiterForm from "../components/RegisterForm/RegisterForm";
-import Loader from "../components/Shared/Loader";
+
+import RegsiterForm from "@/components/RegisterForm/RegisterForm";
+import Loader from "@/components/Shared/Loader";
 
 const page = () => {
   return (

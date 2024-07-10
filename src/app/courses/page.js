@@ -4,7 +4,7 @@ import CourseCard from "@/components/Shared/CourseCard";
 
 const CoursesPage = async () => {
   const courses = await getAllCourses();
-  console.log(courses);
+
   return (
     <section className="">
       <Container>

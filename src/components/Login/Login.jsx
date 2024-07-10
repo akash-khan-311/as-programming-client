@@ -9,9 +9,10 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
 import toast from "react-hot-toast";
 import { PulseLoader } from "react-spinners";
+import { getToken, saveUser } from "@/api/auth";
 
 const Login = () => {
-  const { loading, Login, setLoading, googleSignIn, user } = useAuth();
+  const { loading, Login, setLoading, googleSignIn, user, logOut } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -26,9 +27,15 @@ const Login = () => {
   const submitForm = async (formData) => {
     try {
       const result = await Login(formData.email, formData.password);
-      if (result?.user) {
+      // Get Token
+      const token = await getToken(result?.user?.email);
+      console.log(token);
+      if (token) {
         toast.success("🦄 Login Successful");
         router.push(redirectTo);
+      } else {
+        logOut();
+        toast.error("🦄 Login Failed");
       }
     } catch (error) {}
   };
@@ -36,7 +43,14 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     try {
       const result = await googleSignIn();
-      router.push(redirectTo);
+      await saveUser(result?.user);
+      // Get Token
+      const token = await getToken(result?.user?.email);
+      if (token) {
+        // Redirect
+        router.push(redirectTo);
+        toast.success("🦄 Google Sing In Successful");
+      }
     } catch (error) {
       console.log(error.message);
     } finally {
@@ -119,7 +133,7 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="btn text-white font-semibold w-full"
+                className="btn py-2 text-white font-semibold w-full"
               >
                 {loading ? <PulseLoader size={5} color="#FFFFFF" /> : "Login"}
               </button>

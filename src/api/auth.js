@@ -1,6 +1,4 @@
-import createFetchSecure from ".";
-
-const fetchSecure = createFetchSecure();
+import { fetchSecure } from ".";
 
 // Save user data in database
 export const saveUser = async (user) => {
@@ -9,7 +7,7 @@ export const saveUser = async (user) => {
     role: "user",
     status: "verified",
   };
-  const data = await fetchSecure(`users/${user?.email}`, "PUT", currentUser);
+  const data = await fetchSecure(`/users/${user?.email}`, "PUT", currentUser);
   return data;
 };
 

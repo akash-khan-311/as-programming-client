@@ -1,5 +1,4 @@
-import createFetchSecure from ".";
-const fetchSecure = createFetchSecure();
+import { fetchSecure } from ".";
 
 // Get All courses from database
 export const getAllCourses = async () => {

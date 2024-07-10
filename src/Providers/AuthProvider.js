@@ -1,4 +1,5 @@
 "use client";
+import { clearCoockie } from "@/api/auth";
 import { AuthContext } from "@/context";
 import app from "@/firebase/firebase.config";
 import {
@@ -42,7 +43,9 @@ const AuthProvider = ({ children }) => {
   };
 
   // Logout
-  const logOut = () => {
+  const logOut = async () => {
+    setLoading(true);
+    await clearCoockie();
     toast.success("We Are Miss You 😢");
     router.push("/");
     return auth.signOut();

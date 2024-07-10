@@ -10,6 +10,7 @@ import useAuth from "@/hooks/useAuth";
 import Dropdown from "./DropdownMenu";
 import { usePathname } from "next/navigation";
 import Logo from "./Logo";
+import UserDropDownMenu from "./userDropDownMenu";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -18,9 +19,6 @@ const Navbar = () => {
   const pathname = usePathname();
   const isDashboard = pathname.startsWith("/dashboard");
 
-  console.log();
-  // console.log(pathname);
-  // console.log(isDashboard);
   const scrollHandler = () => {
     if (window.scrollY > 1) {
       setHeader(true);
@@ -45,7 +43,8 @@ const Navbar = () => {
     >
       <Container>
         <nav className="flex items-center justify-between  w-full">
-          <Logo className={"w-10 h-10 py-2 "} />
+          <Logo className="w-10 h-10 py-2 " />
+
           <div className="hidden lg:block">
             <ul className="flex flex-col gap-2 my-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
               <li className="block p-1 font-sans text-lg antialiased font-medium leading-normal text-blue-gray-900">
@@ -73,7 +72,7 @@ const Navbar = () => {
                   <div
                     className={`${
                       open ? "visible opacity-1" : "invisible opacity-0"
-                    } space-y-10 absolute right-0 top-10 z-50 bg-white rounded-md px-2 w-52 `}
+                    } space-y-10 absolute right-0 top-10 z-50 backdrop-blur-md bg-white rounded-md px-2 w-52 `}
                   >
                     <ul>
                       <li className=" text-gray-500 hover:bg-gray-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2">
@@ -112,7 +111,10 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <Dropdown />
+          <div className="lg:hidden flex items-center">
+            <Dropdown />
+            <UserDropDownMenu />
+          </div>
         </nav>
       </Container>
     </nav>
