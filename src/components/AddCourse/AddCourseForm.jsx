@@ -1,167 +1,201 @@
 "use client";
 import useAuth from "@/hooks/useAuth";
 import React from "react";
-import { TbFidgetSpinner } from "react-icons/tb";
+import { ImSpinner11 } from "react-icons/im";
+import Field from "../Shared/Form/Field";
+import { categories } from "@/data/categories";
+import { useForm } from "react-hook-form";
 
-const AddCourseForm = () => {
-  const { loading } = useAuth();
+const AddCourseForm = ({
+  handleImageChange,
+  loading = false,
+  uploadButtonText,
+}) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const submitForm = async (formData) => {};
   return (
-    <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl ">
-      <form>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          <div className="space-y-6">
-            <div className="space-y-1 text-sm">
-              <label htmlFor="location" className="block text-gray-600">
-                Location
-              </label>
-              <input
-                className="w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md "
-                name="location"
-                id="location"
-                type="text"
-                placeholder="Location"
-                required
-              />
-            </div>
-
-            <div className="space-y-1 text-sm">
-              <label htmlFor="category" className="block text-gray-600">
-                Category
-              </label>
-              <select
-                required
-                className="w-full px-4 py-3 border-rose-300 focus:outline-rose-500 rounded-md"
-                name="category"
-              >
-                {/* {categories.map((category) => (
-                  <option value={category.label} key={category.label}>
-                    {category.label}
+    <div className="w-full min-h-[calc(100vh-40px)] md:flex flex-col justify-center items-center p-4 md:p-6 lg:p-10 text-gray-800 rounded-xl backdrop-blur-sm bg-white/10">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-10">
+        Add Your Course
+      </h1>
+      <form onSubmit={handleSubmit(submitForm)}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-2 ">
+          <div className="space-y-5">
+            <Field
+              required={true}
+              label={"Title"}
+              error={errors.title}
+              htmlFor={"name"}
+            >
+              <div className="space-y-1 text-sm ">
+                <input
+                  {...register("title", { required: "Title is Required" })}
+                  name="title"
+                  type="text"
+                  id="title"
+                  placeholder="Course Title"
+                  className="w-full px-4 py-3 text-white border border-pink-500 focus:outline-pink-700 rounded-md backdrop-blur-xl bg-white/30 placeholder:text-white"
+                />
+              </div>
+            </Field>
+            <Field
+              label={"Courese Category"}
+              htmlFor={"category"}
+              required={true}
+              error={errors.category}
+            >
+              <div className="space-y-1 text-sm ">
+                <select
+                  {...register("category", {
+                    required: "Category is Required",
+                  })}
+                  className="w-full text-white px-4 py-3 border border-pink-500 focus:outline-pink-700 rounded-md backdrop-blur-xl bg-white/30"
+                  name="category"
+                  id="category"
+                >
+                  {categories.map((category) => (
+                    <option
+                      className="text-black"
+                      value={category.label}
+                      key={category.label}
+                    >
+                      {category.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </Field>
+            <Field
+              label={"Course Level"}
+              htmlFor={"level"}
+              required={true}
+              error={errors.category}
+            >
+              <div className="space-y-1 text-sm ">
+                <select
+                  {...register("level", {
+                    required: "Level is Required",
+                  })}
+                  className="w-full text-white px-4 py-3 border border-pink-500 focus:outline-pink-700 rounded-md backdrop-blur-xl bg-white/30"
+                  name="level"
+                  id="level"
+                >
+                  <option className="text-black" value="">
+                    Select a level
                   </option>
-                ))} */}
-              </select>
-            </div>
-
-            {/* <div className="space-y-1">
-              <label htmlFor="location" className="block text-gray-600">
-                Select Availability Range
-              </label>
-              <DateRange rangeColors={["#F43F5E"]} />
-            </div> */}
+                  <option className="text-black" value="beginner">
+                    Beginner
+                  </option>
+                  <option className="text-black" value="intermediate">
+                    Intermediate
+                  </option>
+                  <option className="text-black" value="advanced">
+                    Advanced
+                  </option>
+                </select>
+              </div>
+            </Field>
           </div>
-          <div className="space-y-6">
-            <div className="space-y-1 text-sm">
-              <label htmlFor="title" className="block text-gray-600">
-                Title
-              </label>
-              <input
-                className="w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md "
-                name="title"
-                id="title"
-                type="text"
-                placeholder="Title"
-                required
-              />
-            </div>
+          <div className="space-y-5 ">
+            <Field label={"Course Image"} required={true} error={errors.image}>
+              <div className="p-7 backdrop-blur-xl bg-white/30 w-full  m-auto rounded-lg">
+                <div className="file_upload p-[17px] relative border-4 border-dotted border-gray-300 rounded-lg">
+                  <div className="flex flex-col w-max mx-auto text-center">
+                    <label>
+                      <input
+                        onChange={(e) => handleImageChange(e.target.files[0])}
+                        className="text-sm cursor-pointer w-full py-20 hidden"
+                        type="file"
+                        name="image"
+                        id="image"
+                        accept="image/*"
+                        placeholder="Upload image"
+                        hidden
+                      />
 
-            <div className=" p-4 bg-white w-full  m-auto rounded-lg">
-              <div className="file_upload px-5 py-3 relative border-4 border-dotted border-gray-300 rounded-lg">
-                <div className="flex flex-col w-max mx-auto text-center">
-                  <label>
-                    <input
-                      className="text-sm cursor-pointer w-36 hidden"
-                      type="file"
-                      name="image"
-                      id="image"
-                      accept="image/*"
-                      hidden
-                    />
-                    <div className="bg-rose-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-rose-500">
-                      Upload Image
-                    </div>
-                  </label>
+                      <div className="bg-pink-700 text-white border border-pink-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-pink-800">
+                        Upload Image
+                      </div>
+                    </label>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="flex justify-between gap-2">
-              <div className="space-y-1 text-sm">
-                <label htmlFor="price" className="block text-gray-600">
-                  Price
-                </label>
-                <input
-                  className="w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md "
-                  name="price"
-                  id="price"
-                  type="number"
-                  placeholder="Price"
-                  required
-                />
-              </div>
-
-              <div className="space-y-1 text-sm">
-                <label htmlFor="guest" className="block text-gray-600">
-                  Total guest
-                </label>
-                <input
-                  className="w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md "
-                  name="total_guest"
-                  id="guest"
-                  type="number"
-                  placeholder="Total guest"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="flex justify-between gap-2">
-              <div className="space-y-1 text-sm">
-                <label htmlFor="bedrooms" className="block text-gray-600">
-                  Bedrooms
-                </label>
-                <input
-                  className="w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md "
-                  name="bedrooms"
-                  id="bedrooms"
-                  type="number"
-                  placeholder="Bedrooms"
-                  required
-                />
-              </div>
-
-              <div className="space-y-1 text-sm">
-                <label htmlFor="bathrooms" className="block text-gray-600">
-                  Bathrooms
-                </label>
-                <input
-                  className="w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md "
-                  name="bathrooms"
-                  id="bathrooms"
-                  type="number"
-                  placeholder="Bathrooms"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="space-y-1 text-sm">
-              <label htmlFor="description" className="block text-gray-600">
-                Description
-              </label>
-
-              <textarea
-                id="description"
-                className="block rounded-md focus:rose-300 w-full h-32 px-4 py-3 text-gray-800  border border-rose-300 focus:outline-rose-500 "
-                name="description"
-              ></textarea>
+            </Field>
+            <div className="md:flex flex-col md:flex-row justify-center md:gap-x-10 items-center">
+              <Field
+                required={true}
+                label={"Course Price  (BDT)"}
+                error={errors.title}
+                htmlFor={"name"}
+              >
+                <div className="space-y-1 text-sm ">
+                  <input
+                    {...register("price", {
+                      required: "Course Price is Required",
+                    })}
+                    style={{
+                      WebkitAppearance: "none",
+                      MozAppearance: "textfield",
+                      appearance: "textfield",
+                    }}
+                    name="price"
+                    type="number"
+                    id="price"
+                    placeholder="Ex: 2000"
+                    className="w-full px-4 py-3 text-white border border-pink-500 focus:outline-pink-700 rounded-md backdrop-blur-xl bg-white/30 placeholder:text-white"
+                  />
+                </div>
+              </Field>
+              <Field
+                required={true}
+                label={"Duration (month)"}
+                error={errors.title}
+                htmlFor={"name"}
+              >
+                <div className="space-y-1 text-sm ">
+                  <input
+                    {...register("duration", {
+                      required: "Duration is Required",
+                    })}
+                    style={{
+                      WebkitAppearance: "none",
+                      MozAppearance: "textfield",
+                      appearance: "textfield",
+                    }}
+                    name="duration"
+                    type="number"
+                    id="duration"
+                    placeholder="Ex: 6"
+                    className="w-full px-4 py-3 text-white border border-pink-500 focus:outline-pink-700 rounded-md backdrop-blur-xl bg-white/30 placeholder:text-white"
+                  />
+                </div>
+              </Field>
             </div>
           </div>
+        </div>
+        <div className="mt-3">
+          <Field label={"Description"} htmlFor={"description"} required={true}>
+            <div className="space-y-1 text-sm">
+              <textarea
+                id="description"
+                className="block  focus:rose-300 h-32  w-full px-4 py-3 text-white border border-pink-500 focus:outline-pink-700 rounded-md backdrop-blur-xl bg-white/30 placeholder:text-white"
+                name="description"
+                placeholder="Enter About Your Course"
+              ></textarea>
+            </div>
+          </Field>
         </div>
 
         <button
           type="submit"
-          className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500"
+          className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-pink-700 hover:bg-pink-600 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
         >
           {loading ? (
-            <TbFidgetSpinner className="m-auto animate-spin" size={24} />
+            <ImSpinner11 className="m-auto animate-spin" size={24} />
           ) : (
             "Save & Continue"
           )}

@@ -77,7 +77,12 @@ const Sidebar = () => {
             )}
 
             <nav>
-              {role === "user" && <StudentMenu />}
+              {role === "user" && (
+                <>
+                  <StudentMenu />
+                  <button>Become a Teacher</button>
+                </>
+              )}
               {role === "teacher" ? (
                 toggle ? (
                   <TeacherMenu />
