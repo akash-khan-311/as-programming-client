@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { MdDashboard } from "react-icons/md";
 import { RiLogoutCircleLine } from "react-icons/ri";
+import { FaBookmark } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 
 const UserDropDownMenu = () => {
   const [open, setOpen] = useState(false);
@@ -29,6 +31,24 @@ const UserDropDownMenu = () => {
           } space-y-10 absolute right-0 top-10 z-50 backdrop-blur-md bg-white/20 rounded-md px-2 w-52 `}
         >
           <ul>
+            <li className=" hover:backdrop-blur-md hover:bg-white/10 transition-all  pt-[9px] pb-2 px-3 mt-2">
+              <Link
+                href="/dashboard/bookmarks"
+                className="flex items-center transition-colors "
+              >
+                <FaBookmark className="text-lg" />{" "}
+                <span className="text-sm ml-2">Bookmarks</span>
+              </Link>
+            </li>
+            <li className=" hover:backdrop-blur-md hover:bg-white/10 transition-all  pt-[9px] pb-2 px-3 mt-2">
+              <Link
+                href="/dashboard/profile"
+                className="flex items-center transition-colors "
+              >
+                <CgProfile className="text-lg" />{" "}
+                <span className="text-sm ml-2">Profile</span>
+              </Link>
+            </li>
             <li className=" hover:backdrop-blur-md hover:bg-white/10 transition-all  pt-[9px] pb-2 px-3 mt-2">
               <Link
                 href="/dashboard"

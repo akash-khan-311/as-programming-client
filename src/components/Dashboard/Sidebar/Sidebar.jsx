@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // Components
 
 // Icons
@@ -12,11 +12,28 @@ import Image from "next/image";
 import StudentMenu from "../Menu/StudentMenu";
 import Link from "next/link";
 import Logo from "@/components/Shared/Logo";
+import MenuItem from "../MenuItem/MenuItem";
+import ToggleButton from "@/components/Buttons/ToggleButton";
+import TeacherMenu from "../Menu/TeacherMenu";
+
+import { getRole } from "@/api/auth";
 
 const Sidebar = () => {
-  const { logOut } = useAuth();
+  const { user, logOut } = useAuth();
   const [toggle, setToggle] = useState(false);
   const [isActive, setActive] = useState(false);
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    const getRoleFromDb = async () => {
+      const role = await getRole(user?.email);
+      setRole(role);
+    };
+
+    getRoleFromDb();
+  }, [user.email]);
+
+  console.log(role);
 
   //   For guest/host menu item toggle button
   const toggleHandler = (event) => {
@@ -53,31 +70,39 @@ const Sidebar = () => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6 ">
             {/* <MenuItems /> */}
-            <nav>
-              <StudentMenu />
-            </nav>
-            {/* If a user is host
-            {role === "host" && <ToggleButton toggleHandler={toggleHandler} />}
+
+            {/* If a user is a teacher  */}
+            {role === "teacher" && (
+              <ToggleButton toggleHandler={toggleHandler} />
+            )}
 
             <nav>
-              {role === "guest" && <GuestMenu />}
-              {role === "host" ? toggle ? <HostMenu /> : <GuestMenu /> : ""}
-              {role === "admin" && <AdminMenu />}
-            </nav> */}
+              {role === "user" && <StudentMenu />}
+              {role === "teacher" ? (
+                toggle ? (
+                  <TeacherMenu />
+                ) : (
+                  <StudentMenu />
+                )
+              ) : (
+                ""
+              )}
+              {/* {role === "admin" && <AdminMenu />} */}
+            </nav>
           </div>
         </div>
 
         <div>
           <hr />
 
-          {/* <MenuItem
+          <MenuItem
             icon={FcSettings}
             label="Profile"
-            address="/dashboard/profile"
-          /> */}
+            path="/dashboard/profile"
+          />
           <button
             onClick={logOut}
-            className="flex w-full items-center px-4 py-2 mt-5 hover:backdrop-blur-sm hover:bg-white/10 text-white transition-colors duration-300 transform"
+            className="flex w-full items-center px-4 py-2  hover:backdrop-blur-sm hover:bg-white/10 text-white transition-colors duration-300 transform"
           >
             <GrLogout className="w-5 h-5" />
 

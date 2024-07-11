@@ -11,6 +11,8 @@ import Dropdown from "./DropdownMenu";
 import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 import UserDropDownMenu from "./userDropDownMenu";
+import { FaBookmark } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -75,24 +77,40 @@ const Navbar = () => {
                     } space-y-10 absolute right-0 top-10 z-50 backdrop-blur-md bg-white rounded-md px-2 w-52 `}
                   >
                     <ul>
-                      <li className=" text-gray-500 hover:bg-gray-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2">
-                        <Link
-                          href="/dashboard"
-                          className="flex items-center transition-colors "
-                        >
-                          <MdDashboard className="text-lg" />{" "}
+                      <Link
+                        href="/dashboard"
+                        className="flex items-center transition-colors "
+                      >
+                        <li className="flex items-center w-full text-gray-500 hover:bg-gray-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2">
+                          <MdDashboard className="text-lg" />
                           <span className="text-lg ml-2">Dashboard</span>
-                        </Link>
-                      </li>
-                      <li className=" hover:bg-red-100 p-1 font-sans text-lg antialiased font-medium  tw-full pt-[9px] pb-2 px-3 text-start leading-tight cursor-pointer select-none transition-all hover:bg-opacity-80 focus:bg-opacity-80 active:bg-opacity-80 hover:text-blue-gray-900 focus:text-blue-gray-900 active:text-blue-gray-900 outline-none flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10 mb-3">
-                        <button
-                          onClick={logOut}
-                          className="flex gap-x-2 text-red-500 items-center transition-colors "
-                        >
-                          <RiLogoutCircleLine className="text-lg" />{" "}
-                          <span className="text-lg ml-2">Logout</span>
-                        </button>
-                      </li>
+                        </li>
+                      </Link>
+                      <Link
+                        href="/dashboard/bookmarks"
+                        className=" flex items-center transition-colors"
+                      >
+                        <li className=" text-gray-500 hover:bg-gray-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center w-full">
+                          <FaBookmark className="text-lg" />
+                          <span className="text-lg ml-2">Bookmarks</span>
+                        </li>
+                      </Link>
+                      <Link
+                        href="/dashboard/profile"
+                        className=" flex items-center transition-colors"
+                      >
+                        <li className=" text-gray-500 hover:bg-gray-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center w-full">
+                          <CgProfile className="text-lg" />
+                          <span className="text-lg ml-2">Profile</span>
+                        </li>
+                      </Link>
+                      <button
+                        onClick={logOut}
+                        className="text-gray-500 hover:bg-red-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center  w-full mb-3"
+                      >
+                        <RiLogoutCircleLine className="text-lg" />
+                        <span className="text-lg ml-2 ">Logout</span>
+                      </button>
                     </ul>
                   </div>
                 </li>

@@ -1,3 +1,4 @@
+import { getRole } from "@/api/auth";
 import axios from "axios";
 
 export const imageUpload = async (image) => {
@@ -9,4 +10,9 @@ export const imageUpload = async (image) => {
     imageFormData
   );
   return data;
+};
+
+export const getRoleFromDb = async (email) => {
+  const role = await getRole(email);
+  return role;
 };

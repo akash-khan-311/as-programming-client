@@ -25,7 +25,7 @@ export const clearCoockie = async () => {
 };
 // Get user role
 export const getRole = async (email) => {
-  const data = await fetchSecure(`/users/${email}`);
+  const data = await fetchSecure(`/user/${email}`);
   return data.role;
 };
 

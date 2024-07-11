@@ -9,7 +9,7 @@ const MenuItem = ({ label, path, icon: Icon }) => {
     <Link
       href={path}
       end
-      className={`flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:backdrop-blur-sm hover:bg-white/10   hover:text-gray-100 ${
+      className={`flex items-center px-4 py-2 my-4  transition-colors duration-300 transform  hover:backdrop-blur-sm hover:bg-white/10   hover:text-gray-100 ${
         isActive
           ? "backdrop-blur-sm bg-white/10 text-gray-100"
           : "text-gray-100"

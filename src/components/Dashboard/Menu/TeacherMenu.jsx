@@ -23,7 +23,7 @@ const TeacherMenu = () => {
         icon={MdOutlineManageHistory}
       />
       <MenuItem
-        label="Manage Course"
+        label="Assignments"
         path="/dashboard/tassignments"
         icon={MdOutlineManageHistory}
       />
