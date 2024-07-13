@@ -3,7 +3,8 @@ import Image from "next/image";
 import { MdMarkEmailRead } from "react-icons/md";
 import { GiTeacher } from "react-icons/gi";
 const CourseDetails = ({ course }) => {
-  const { name, img, description, price } = course;
+  const { title, category, img, description, price, duration, teacher } =
+    course;
   return (
     <section className="">
       <Container>
@@ -14,7 +15,7 @@ const CourseDetails = ({ course }) => {
           <div className="text-white w-full flex flex-col lg:flex-row md:justify-between  items-center gap-x-4 space-y-10 lg:space-y-0">
             <div className="flex flex-col text-gray-700 bg-white shadow-md md:w-96 w-full  rounded-xl bg-clip-border">
               <div className="relative h-56   overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
-                <Image fill src={img} alt={name} layout="fill" />
+                <Image fill src={img} alt={title} layout="fill" />
               </div>
               <div className="p-6">
                 <h5 className="block mb-2 font-sans text-xl md:text-2xl lg:text-3xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -40,16 +41,16 @@ const CourseDetails = ({ course }) => {
             </div>
             <div className="space-y-4 flex-1 ">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center lg:text-left">
-                {name}
+                {title}
               </h2>
               <p className="text-center lg:text-left">{description}</p>
               <div className="flex justify-between items-center">
                 <div className="flex flex-col justify-start mx-auto md:mx-0 items-start">
                   <p className="flex items-center gap-x-3 text-xl">
-                    <GiTeacher /> Instructor Name : Instructor Name
+                    <GiTeacher /> Instructor Name : {teacher.name}
                   </p>
                   <p className="flex items-center gap-x-3 text-xl">
-                    <MdMarkEmailRead /> Instructor Email : Instructor Email
+                    <MdMarkEmailRead /> Instructor Email : {teacher.email}
                   </p>
                 </div>
                 <div>

@@ -44,9 +44,7 @@ const Dropdown = () => {
             {" "}
             <ActiveLink path={"/courses"}>Courses</ActiveLink>
           </li>
-          <li className="text-sm">
-            <ActiveLink path={"/teach"}>Be a Instructor</ActiveLink>
-          </li>
+
           {!user && (
             <li>
               <Link href="/login">

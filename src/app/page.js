@@ -10,15 +10,15 @@ import { Suspense } from "react";
 
 export default function Home() {
   return (
-    <Suspense fallback={<Loader />}>
-      <>
-        <HeroSection />
-        <Features />
-        <About />
-        <BestCourse />
-        <BeInstructor />
-        <Subscribe />
-      </>
-    </Suspense>
+    // <Suspense fallback={<Loader />}>
+    <>
+      <HeroSection />
+      <Features />
+      <About />
+      <BestCourse />
+      <BeInstructor />
+      <Subscribe />
+    </>
+    // </Suspense>
   );
 }

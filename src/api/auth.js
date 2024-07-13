@@ -1,4 +1,5 @@
-import { fetchSecure } from ".";
+import fetchSecure from ".";
+
 
 // Save user data in database
 export const saveUser = async (user) => {
@@ -14,24 +15,24 @@ export const saveUser = async (user) => {
 // Get Token from server
 export const getToken = async (email) => {
   const data = await fetchSecure(`/jwt`, "POST", { email });
-  console.log("token paichi==============>");
+  console.log("token paichi==============>", data);
   return data;
 };
 
 // Remove Token From Browser
 export const clearCoockie = async () => {
-  const data = await fetchSecure("/logout");
+  const data = await fetchSecure("/logout", "GET");
   return data;
 };
 // Get user role
 export const getRole = async (email) => {
-  const data = await fetchSecure(`/user/${email}`);
+  const data = await fetchSecure(`/user/${email}`, "GET");
   return data.role;
 };
 
 // get all users
 export const getAllUsers = async () => {
-  const data = await fetchSecure("/users");
+  const data = await fetchSecure("/users", "GET");
   return data;
 };
 

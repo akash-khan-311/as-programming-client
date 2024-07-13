@@ -33,8 +33,6 @@ const Sidebar = () => {
     getRoleFromDb();
   }, [user.email]);
 
-  console.log(role);
-
   //   For guest/host menu item toggle button
   const toggleHandler = (event) => {
     setToggle(event.target.checked);

@@ -55,9 +55,7 @@ const Navbar = () => {
               <li className="block p-1 font-sans text-lg antialiased font-medium leading-normal text-blue-gray-900">
                 <ActiveLink path="/courses">Courses</ActiveLink>
               </li>
-              <li className="block p-1 font-sans text-lg antialiased font-medium leading-normal text-blue-gray-900">
-                <ActiveLink path="/teach">Be a Instructor</ActiveLink>
-              </li>
+
               {user ? (
                 <li
                   onClick={() => setOpen(!open)}
