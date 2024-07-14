@@ -17,6 +17,7 @@ import ToggleButton from "@/components/Buttons/ToggleButton";
 import TeacherMenu from "../Menu/TeacherMenu";
 
 import { getRole } from "@/api/auth";
+import AdminMenu from "../Menu/AdminMenu";
 
 const Sidebar = () => {
   const { user, logOut } = useAuth();
@@ -75,6 +76,7 @@ const Sidebar = () => {
             )}
 
             <nav>
+              {role === "admin" && <AdminMenu />}
               {role === "user" && (
                 <>
                   <StudentMenu />

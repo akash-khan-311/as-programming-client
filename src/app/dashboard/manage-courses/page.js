@@ -1,3 +1,6 @@
+import { getCoursesForTeacher } from "@/api/courses";
+import ManageCoursesForTeacher from "@/components/ManageCoursesForTeacher/ManageCoursesForTeacher";
+
 export const metadata = {
     title: "Manage Courses | Dashbaord",
     description: "AS Programming offers a wide range of IT-related courses, including web development, data science, cybersecurity, cloud computing, and full-stack JavaScript development. Start your learning journey with us and achieve your career goals.",
@@ -15,12 +18,11 @@ export const metadata = {
 
 };
 const ManageCoursePage = () => {
+
     return (
-        <section className=''>
-            <div className=''>
-                Welcome to ManageCoursePage
-            </div>
-        </section>
+        <>
+            <ManageCoursesForTeacher />
+        </>
     )
 }
 export default ManageCoursePage;

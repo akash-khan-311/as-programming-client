@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    isr: true,
-  },
   images: {
     remotePatterns: [
       {
@@ -12,6 +9,26 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "varthana.com",
+      },
+      {
+        protocol: "https",
+        hostname: "wallpapercave.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.pngitem.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.freepik.com",
+      },
+      {
+        protocol: "https",
+        hostname: "plus.unsplash.com",
       },
     ],
   },

@@ -29,7 +29,7 @@ export const metadata = {
 const CourseDetailPage = async ({ params: { id } }) => {
   const course = await getSingleCourse(id);
 
-  console.log(course)
+
 
   return (
     <ProtectedRoute>

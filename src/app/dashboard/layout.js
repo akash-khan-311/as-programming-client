@@ -27,7 +27,7 @@ export const metadata = {
 
 export default function DashboardLayout({ children }) {
   return (
-    <section className={`${inter.className} relative min-h-screen md:flex`}>
+    <div className={`${inter.className} relative min-h-screen md:flex`}>
       <ProtectedRoute>
         <Sidebar />
         <Toaster />
@@ -37,6 +37,6 @@ export default function DashboardLayout({ children }) {
         </div>
         {/* </Suspense> */}
       </ProtectedRoute>
-    </section>
+    </div>
   );
 }

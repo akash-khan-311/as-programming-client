@@ -19,7 +19,7 @@ const UserDropDownMenu = () => {
       >
         <Image
           className=" rounded-full cursor-pointer"
-          src={"/avatar.png"}
+          src={user?.photoURL || "/avatar.png"}
           width={30}
           height={30}
           alt="Rounded avatar"

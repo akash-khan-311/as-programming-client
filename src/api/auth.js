@@ -30,9 +30,26 @@ export const getRole = async (email) => {
   return data.role;
 };
 
-// get all users
-export const getAllUsers = async () => {
-  const data = await fetchSecure("/users", "GET");
+// get all user cover image
+export const getUserCoverImg = async (email) => {
+  const data = await fetchSecure(`/user/${email}`, "GET");
+  return data.coverImg;
+};
+
+// Get user data from database
+export const getUser = async (email) => {
+  const data = await fetchSecure(`/users/${email}`, "GET");
+  return data;
+};
+
+// Update user cover image
+export const updateUserCoverImg = async (email, coverImg) => {
+  const currentUser = {
+    email,
+    coverImg,
+    status: "verified",
+  };
+  const data = await fetchSecure(`/users/update/${email}`, "PUT", currentUser);
   return data;
 };
 

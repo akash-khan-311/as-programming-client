@@ -1,6 +1,6 @@
 import useAuth from "./useAuth";
 import { getRole } from "../api/auth";
-import { useQuery } from "@tanstack/react-query";
+
 
 const useRole = () => {
   const { user, loading } = useAuth();
