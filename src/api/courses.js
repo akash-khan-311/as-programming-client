@@ -5,8 +5,9 @@ import fetchSecure from ".";
 
 
 // Get All courses from database
-export const getAllCourses = async () => {
-  const data = await fetchSecure("/courses", "GET");
+export const getAllCourses = async (page, productsPerPage) => {
+  const skip = (page - 1) * productsPerPage;
+  const data = await fetchSecure(`/courses?limit=${productsPerPage}&skip=${skip}`, "GET");
   return data;
 };
 

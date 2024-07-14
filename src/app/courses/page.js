@@ -1,6 +1,9 @@
-import { getAllCourses } from "@/api/courses";
+
+
+import CourseList from "@/components/CourseList/CourseList";
 import Container from "@/components/Shared/Container";
-import CourseCard from "@/components/Shared/CourseCard";
+
+
 export const metadata = {
   title: "Courses | AS Programming",
   description: "AS Programming offers a wide range of IT-related courses, including web development, data science, cybersecurity, cloud computing, and full-stack JavaScript development. Start your learning journey with us and achieve your career goals.",
@@ -18,8 +21,11 @@ export const metadata = {
 
 };
 
-const CoursesPage = async () => {
-  const courses = await getAllCourses();
+const CoursesPage = () => {
+
+
+
+
 
   // console.log(courses);
   return (
@@ -32,11 +38,7 @@ const CoursesPage = async () => {
         </div>
 
         {/* Courses List */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8">
-          {courses.map((course) => (
-            <CourseCard key={course._id} data={course} />
-          ))}
-        </div>
+        <CourseList />
       </Container>
     </section>
   );
