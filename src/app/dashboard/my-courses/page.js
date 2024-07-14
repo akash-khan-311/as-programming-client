@@ -1,3 +1,5 @@
+import MyCourseForTeacher from "@/components/MyCourseForTeacher/MyCourseForTeacher";
+
 export const metadata = {
     title: "My Courses | Dashbaord",
     description: "AS Programming offers a wide range of IT-related courses, including web development, data science, cybersecurity, cloud computing, and full-stack JavaScript development. Start your learning journey with us and achieve your career goals.",
@@ -16,11 +18,9 @@ export const metadata = {
 };
 const MyCoursesPage = () => {
     return (
-        <section className=''>
-            <div className=''>
-                Welcome to MyCoursesPage
-            </div>
-        </section>
+        <>
+            <MyCourseForTeacher />
+        </>
     )
 }
 export default MyCoursesPage;

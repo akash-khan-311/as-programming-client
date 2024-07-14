@@ -31,7 +31,7 @@ const CourseCard = ({ data }) => {
       </div>
       <Link
         className="bottom-5 w-full  absolute btn   py-2 text-sm"
-        href={`/courses/${_id}`}
+        href={`/course/${_id}`}
       >
         View Details
       </Link>
