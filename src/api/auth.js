@@ -1,6 +1,5 @@
 import fetchSecure from ".";
 
-
 // Save user data in database
 export const saveUser = async (user) => {
   const currentUser = {
@@ -22,6 +21,11 @@ export const getToken = async (email) => {
 // Remove Token From Browser
 export const clearCoockie = async () => {
   const data = await fetchSecure("/logout", "GET");
+  return data;
+};
+// Get All user for admin
+export const getAllUsers = async () => {
+  const data = await fetchSecure("/users", "GET");
   return data;
 };
 // Get user role

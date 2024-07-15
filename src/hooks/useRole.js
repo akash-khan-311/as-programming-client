@@ -1,6 +1,6 @@
+"use client";
 import useAuth from "./useAuth";
 import { getRole } from "../api/auth";
-
 
 const useRole = () => {
   const { user, loading } = useAuth();

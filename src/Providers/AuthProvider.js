@@ -52,10 +52,16 @@ const AuthProvider = ({ children }) => {
   };
 
   // update user profile
-  const updateUserProfile = (name, photo) => {
+  const updateUserProfileName = (name) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
-      photoURL: photo,
+    });
+  };
+
+  // update user profile image
+  const updateUserProfileImage = (image) => {
+    return updateProfile(auth.currentUser, {
+      photoURL: image,
     });
   };
 
@@ -79,7 +85,8 @@ const AuthProvider = ({ children }) => {
     logOut,
     resetPassword,
     setLoading,
-    updateUserProfile,
+    updateUserProfileName,
+    updateUserProfileImage,
   };
 
   return (

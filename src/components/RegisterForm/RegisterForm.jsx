@@ -21,7 +21,7 @@ const RegsiterForm = () => {
     loading,
     setLoading,
     googleSignIn,
-    updateUserProfile,
+    updateUserProfileName,
     user,
   } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
@@ -36,7 +36,7 @@ const RegsiterForm = () => {
 
     try {
       const result = await createUser(formData.email, formData.password);
-      await updateUserProfile(formData.name);
+      await updateUserProfileName(formData.name);
       // Save user in database
       await saveUser(result?.user);
 

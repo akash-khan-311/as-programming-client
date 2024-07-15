@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { imageUpload } from "@/lib";
 import { categories } from "@/data/categories";
-import Field from "../Shared/Form/Field";
+import Field from "../../Shared/Form/Field";
 import useAuth from "@/hooks/useAuth";
 import { saveCourse } from "@/api/courses";
 // import { revalidatePath } from "next/cache";
