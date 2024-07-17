@@ -94,7 +94,7 @@ const Profile = () => {
   return (
     <div className="mx-auto max-w-242.5">
       <div className="overflow-hidden rounded-sm border border-stroke backdrop-blur-lg bg-white/10 shadow-default dark:border-strokedark dark:bg-boxdark">
-        <div className="relative z-20 h-[140px] md:h-72">
+        <div className="relative -z-20 h-[140px] md:h-72">
           <Image
             src={coverPhoto}
             alt="profile cover"
@@ -102,7 +102,7 @@ const Profile = () => {
             width={970}
             height={660}
           />
-          <div className="absolute bottom-1 right-1 z-10 xsm:bottom-4 xsm:right-4">
+          <div className=" absolute bottom-1 right-1 z-10 xsm:bottom-4 xsm:right-4">
             <label
               htmlFor="cover"
               className="flex cursor-pointer items-center justify-center gap-2 rounded bg-primary px-2 py-1 text-sm font-medium text-white hover:bg-opacity-80 xsm:px-4"
@@ -121,8 +121,8 @@ const Profile = () => {
             </label>
           </div>
         </div>
-        <div className="px-4  text-center lg:pb-8">
-          <div className=" mx-auto   w-full overflow-hidden rounded-full  p-1  sm:max-w-44 sm:p-3 ">
+        <div className="px-4 text-center lg:pb-8">
+          <div className=" mx-auto   w-full overflow-hidden ">
             <div className="relative block ">
               <Image
                 width={100}

@@ -24,9 +24,6 @@ export const metadata = {
 const CoursesPage = () => {
 
 
-
-
-
   // console.log(courses);
   return (
     <section className="">

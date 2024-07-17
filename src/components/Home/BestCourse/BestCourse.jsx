@@ -3,14 +3,25 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { getOnly6Courses } from "@/data/data";
 
 import CourseCard from "@/components/Shared/CourseCard";
 import Container from "@/components/Shared/Container";
 
+import { getBeginnerCourses } from "@/api/courses";
+import { useEffect, useState } from "react";
+
 const BestCourse = () => {
-  const courses = getOnly6Courses();
-  console.log(courses);
+  const [courses, setCourses] = useState([]);
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const data = await getBeginnerCourses();
+        setCourses(data);
+      } catch (error) {}
+    };
+    fetchCourses();
+  }, []);
+
   return (
     <section className="">
       <Container>
@@ -33,7 +44,11 @@ const BestCourse = () => {
                 slidesPerView: 3,
                 spaceBetween: 50,
               },
-              1400: {
+              1280: {
+                slidesPerView: 3,
+                spaceBetween: 50,
+              },
+              1536: {
                 slidesPerView: 4,
                 spaceBetween: 50,
               },

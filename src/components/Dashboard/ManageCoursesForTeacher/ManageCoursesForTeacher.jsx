@@ -1,39 +1,61 @@
 "use client";
-
 import useAuth from "@/hooks/useAuth";
-import { useEffect, useState } from "react";
-
-import { getCoursesForTeacher } from "@/api/courses";
+import { getCoursesForTeacher, removeCourse } from "@/api/courses";
 import CourseManageRow from "../TableRows/CourseManageRow";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import Loader from "@/components/Shared/Loader";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+
 const ManageCoursesForTeacher = () => {
   const { user } = useAuth();
-  const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const fetchedCourses = await getCoursesForTeacher(user?.email);
-        setCourses(fetchedCourses);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+  const queryClient = useQueryClient();
+
+  const { data: courses = [], isLoading } = useQuery({
+    queryKey: ["courses"],
+    queryFn: async () => await getCoursesForTeacher(user?.email),
+  });
+
+  const deleteMutation = useMutation(removeCourse, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["courses"]);
+      toast.success("Course deleted successfully");
+    },
+    onError: () => {
+      toast.error("Failed to delete course");
+    },
+  });
+
+  const handleDeleteCourse = async (courseId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await deleteMutation.mutateAsync(courseId);
+
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your Course has been deleted.",
+            icon: "success",
+          });
+        } catch (error) {
+          console.error("Error deleting course:", error);
+        }
       }
-    };
+    });
+  };
 
-    if (user?.email) {
-      fetchCourses();
-    }
-  }, [user?.email]);
-
-  if (loading) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return <Loader />;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
@@ -87,17 +109,19 @@ const ManageCoursesForTeacher = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className=" backdrop-blur-sm bg-white/10 divide-y divide-gray-200">
-                  {/* Room row data */}{" "}
-                  {courses &&
-                    courses.map((course) => (
-                      <CourseManageRow key={course._id} course={course} />
-                    ))}
+                <tbody className="backdrop-blur-sm bg-white/10 divide-y divide-gray-200">
+                  {courses.map((course) => (
+                    <CourseManageRow
+                      key={course._id}
+                      course={course}
+                      handleDeleteCourse={handleDeleteCourse}
+                    />
+                  ))}
                 </tbody>
               </table>
             ) : (
               <h1 className="text-3xl md:text-4xl lg:text-5xl flex justify-center items-center text-center py-4">
-                You have not Added a Pet yet
+                You have not added any courses yet
               </h1>
             )}
           </div>
@@ -106,4 +130,5 @@ const ManageCoursesForTeacher = () => {
     </div>
   );
 };
+
 export default ManageCoursesForTeacher;

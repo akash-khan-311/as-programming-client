@@ -13,6 +13,10 @@ import Logo from "./Logo";
 import UserDropDownMenu from "./userDropDownMenu";
 import { FaBookmark } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
+import { FaCartShopping } from "react-icons/fa6";
+import { useQuery } from "react-query";
+import { getUserCartItems } from "@/api/courses";
+import Loader from "./Loader";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -21,6 +25,16 @@ const Navbar = () => {
   const pathname = usePathname();
   const isDashboard = pathname.startsWith("/dashboard");
 
+  // Fetch cart items count using React Query
+  const { data: cartItems } = useQuery(
+    ["cartItems", user?.email],
+    async () => await getUserCartItems(user?.email),
+    {
+      enabled: !!user?.email, // Only fetch if user email is available
+    }
+  );
+  // Calculate cart items count
+  const cartItemCount = cartItems?.length || 0;
   const scrollHandler = () => {
     if (window.scrollY > 1) {
       setHeader(true);
@@ -31,10 +45,12 @@ const Navbar = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", scrollHandler);
+
     return () => {
       window.addEventListener("scroll", scrollHandler);
     };
   }, []);
+
   return (
     <nav
       className={`${
@@ -59,20 +75,20 @@ const Navbar = () => {
               {user ? (
                 <li
                   onClick={() => setOpen(!open)}
-                  className="relative block p-1 font-sans text-lg antialiased font-medium leading-normal text-blue-gray-900"
+                  className="relative block rounded-full cursor-pointer p-1 font-sans text-lg antialiased font-medium leading-normal text-blue-gray-900"
                 >
                   <Image
-                    className=" rounded-full cursor-pointer"
+                    className="rounded-full h-10 w-10"
                     src={user.photoURL ? user.photoURL : "/avatar.png"}
-                    width={30}
-                    height={30}
+                    width={40}
+                    height={40}
                     alt="Rounded avatar"
                   />
 
                   <div
                     className={`${
                       open ? "visible opacity-1" : "invisible opacity-0"
-                    } space-y-10 absolute right-0 top-10 z-50 backdrop-blur-md bg-white rounded-md px-2 w-52 `}
+                    } space-y-10 absolute right-0 top-16 z-50 backdrop-blur-md bg-white rounded-md px-2 w-52 `}
                   >
                     <ul>
                       <Link
@@ -85,12 +101,17 @@ const Navbar = () => {
                         </li>
                       </Link>
                       <Link
-                        href="/dashboard/bookmarks"
-                        className=" flex items-center transition-colors"
+                        href="/cart"
+                        className=" flex items-center justify-between transition-colors"
                       >
-                        <li className=" text-gray-500 hover:bg-gray-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center w-full">
-                          <FaBookmark className="text-lg" />
-                          <span className="text-lg ml-2">Bookmarks</span>
+                        <li className=" text-gray-500 hover:bg-gray-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center justify-between w-full">
+                          <div className="flex items-center">
+                            <FaCartShopping className="text-lg" />
+                            <span className="text-lg ml-2">Cart</span>
+                          </div>
+                          <span className="text-black bg-red-200 text-sm p-1 rounded-full w-6 h-6 flex items-center justify-center">
+                            {cartItemCount}
+                          </span>
                         </li>
                       </Link>
                       <Link

@@ -1,7 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 
-const CourseManageRow = ({ course }) => {
-  const { title, category, img, level, price, duration } = course;
+const CourseManageRow = ({ course, handleDeleteCourse }) => {
+  const { title, category, img, level, price, duration, _id } = course;
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200  text-sm">
@@ -37,14 +38,16 @@ const CourseManageRow = ({ course }) => {
         </p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 text-sm">
-        <button
+        <Link
+          href={"/dashboard/update/" + _id}
           className={`text-green-500 px-2 py-1 bg-white rounded-md whitespace-no-wrap text-center `}
         >
           Update
-        </button>
+        </Link>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 text-sm">
         <button
+          onClick={() => handleDeleteCourse(_id)}
           className={`text-red-500 px-2 py-1 bg-white rounded-md whitespace-no-wrap text-center `}
         >
           Delete

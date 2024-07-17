@@ -2,9 +2,11 @@ import Container from "@/components/Shared/Container";
 import Image from "next/image";
 import { MdMarkEmailRead } from "react-icons/md";
 import { GiTeacher } from "react-icons/gi";
+import HandleAddToCart from "../HandleAddToCart";
 const CourseDetails = ({ course }) => {
-  const { title, category, img, description, price, duration, teacher } =
+  const { title, category, img, description, price, duration, _id, teacher } =
     course;
+
   return (
     <section className="">
       <Container>
@@ -30,13 +32,7 @@ const CourseDetails = ({ course }) => {
                 >
                   Enroll Course
                 </button>
-                <button
-                  className="select-none mt-4 text-sm md:text-lg lg:text-xl w-full capitalize rounded-lg bg-pink-500 py-2 lg:py-3 px-6 text-center align-middle font-sans font-bold  text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                  type="button"
-                  data-ripple-light="true"
-                >
-                  Add To Bookmark
-                </button>
+                <HandleAddToCart id={_id} />
               </div>
             </div>
             <div className="space-y-4 flex-1 ">

@@ -16,6 +16,16 @@ export const imageUpload = async (image) => {
   }
 };
 
+export const getTotalPrice = (cartItems) => {
+  if (!cartItems || cartItems.length === 0) return 0;
+
+  let totalPrice = 0;
+  cartItems.forEach((item) => {
+    totalPrice += item.price; // Assuming item.price is the price of each item
+  });
+  return totalPrice;
+};
+
 export const getRoleFromDb = async (email) => {
   const role = await getRole(email);
   return role;
