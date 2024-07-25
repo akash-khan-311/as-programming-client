@@ -41,6 +41,12 @@ export const saveCourseForUser = async (courseId, userEmail) => {
   return data;
 };
 
+// Save admissions course on db
+export const saveAssignments = async (assignment) => {
+  const data = fetchSecure("/assignments", "POST", { assignment });
+  return data;
+};
+
 // get user cart
 export const getUserCartItems = async (email) => {
   if (!email) return [];

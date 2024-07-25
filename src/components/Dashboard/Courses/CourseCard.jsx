@@ -1,12 +1,17 @@
 "use client";
-import { getSingleCourse } from "@/api/courses";
+import { getSingleCourse, saveAssignments } from "@/api/courses";
 import Field from "@/components/Shared/Form/Field";
+import useAuth from "@/hooks/useAuth";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useQuery } from "react-query";
+import { PulseLoader } from "react-spinners";
 
 const CourseCard = ({ id }) => {
+  const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const {
     data: singleCourse,
@@ -19,17 +24,36 @@ const CourseCard = ({ id }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const submitForm = async (formData) => {
-    console.log(formData);
+    try {
+      setLoading(true);
+      const assignmentData = {
+        assignment: formData.assignment,
+        assignmentId: singleCourse._id,
+        studentName: user.displayName,
+        studentEmail: user?.email,
+        teacherName: singleCourse.teacher.name,
+        teacherEmail: singleCourse.teacher.email,
+      };
+      const result = await saveAssignments(assignmentData);
+      console.log(result);
+      if (result.acknowledged && result.insertedId) {
+        toast.success("Assignment Submit Successful 👍");
+        setLoading(false);
+        reset();
+        setModalOpen(false);
+      }
+    } catch (error) {}
   };
 
   if (isLoading) {
     return <div className="text-4xl text-white">Course Comming.........</div>;
   }
-
+  console.log(singleCourse);
   return (
     <div className=" mx-auto">
       <div className="flex flex-col  rounded-lg backdrop-blur-md bg-white/20 text-white min-h-52 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  md:flex-row">
@@ -83,13 +107,12 @@ const CourseCard = ({ id }) => {
               <textarea
                 {...register("assignment", {
                   required: "Field is Empty",
-                  minLength: 20,
                 })}
                 className={`backdrop-blur-sm bg-white/10 border focus:outline-none p-5 w-full text-lg placeholder:text-white ${
                   !!errors.assignment ? "border-red-500" : "border-white "
                 } `}
                 name="assignment"
-                rows={10}
+                rows={5}
                 id="assignment"
                 placeholder="live_link: your_github_repository_url"
               ></textarea>
@@ -99,7 +122,7 @@ const CourseCard = ({ id }) => {
               className="bg-pink-600 hover:bg-pink-500 w-2/3 mx-auto flex justify-center items-center rounded-lg py-2 mb-10 mt-3"
               type="submit"
             >
-              Submit
+              {loading ? <PulseLoader size={5} color="#FFFFFF" /> : "Submit"}
             </button>
           </form>
         </div>
