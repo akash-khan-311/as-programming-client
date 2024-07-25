@@ -121,7 +121,7 @@ const RegsiterForm = () => {
                       id="email"
                       placeholder="Enter Your Email Address"
                       className={`backdrop-blur-sm ${
-                        !!errors.name ? "border-red-500" : "border-white "
+                        !!errors.email ? "border-red-500" : "border-white "
                       } bg-white/10 border   sm:text-sm rounded-lg my-2 focus:outline-none block w-full p-2.5   text-white "
                     `}
                     />

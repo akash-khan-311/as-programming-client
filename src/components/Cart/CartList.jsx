@@ -50,14 +50,14 @@ const CartList = () => {
   };
 
   if (isLoading) return <Loader />;
-
+  console.log(cartItems);
   return (
     <section className="py-24 relative">
       <div className="w-full px-4 md:px-5 lg-6 mx-auto backdrop-blur-sm bg-white/10 rounded-3xl py-10">
         <h2 className="title font-manrope font-bold text-4xl leading-10 mb-8 text-center ">
           Shopping Cart
         </h2>
-        {cartItems.length === 0 ? (
+        {cartItems.length === 0 || !cartItems.length ? (
           <>
             <div>
               <h1>No items in cart</h1>

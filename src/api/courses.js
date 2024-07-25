@@ -43,8 +43,9 @@ export const saveCourseForUser = async (courseId, userEmail) => {
 
 // get user cart
 export const getUserCartItems = async (email) => {
+  if (!email) return [];
   const data = await fetchSecure(`/cart/${email}`, "GET");
-  return data;
+  return data || [];
 };
 
 // Remove from cart
@@ -56,5 +57,17 @@ export const removeCourseFromCart = async (courseId, email) => {
 // remove course from db
 export const removeCourse = async (id) => {
   const data = await fetchSecure(`/course/${id}`, "DELETE");
+  return data;
+};
+
+// Get Admissions course by email
+export const admissionsCourses = async (email) => {
+  const data = await fetchSecure(`/admissions/${email}`);
+  return data;
+};
+
+// Get Admissions course by id
+export const getCoursesById = async (id) => {
+  const data = fetchSecure(`/admissions/course/${id}`);
   return data;
 };
