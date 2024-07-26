@@ -33,7 +33,9 @@ const Courses = () => {
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 my-10">
         {courses?.map((course) =>
-          course.courseIds.map((id) => <CourseCard key={id} id={id} />)
+          course.courseInfo.map((info) => (
+            <CourseCard key={info.courseId} id={info.courseId} />
+          ))
         )}
       </div>
     </>

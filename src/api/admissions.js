@@ -1,9 +1,9 @@
 import fetchSecure from ".";
 
-export const completePurchase = async (email, courseIds, shippingDetails) => {
+export const completePurchase = async (email, courseInfo, shippingDetails) => {
   const result = await fetchSecure("/order", "POST", {
     email,
-    courseIds,
+    courseInfo,
     shippingDetails,
   });
   return result;

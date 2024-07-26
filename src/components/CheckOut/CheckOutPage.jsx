@@ -62,10 +62,15 @@ const CheckOutPage = () => {
       totalAmount: Math.ceil(totalPrice),
     };
 
-    const courseIds = courses.map((course) => course._id);
+    const courseInfo = courses.map((course) => {
+      return {
+        courseId: course._id,
+        teacherEmail: course.teacher.email,
+      };
+    });
 
     try {
-      const result = await completePurchase(user?.email, courseIds, data);
+      const result = await completePurchase(user?.email, courseInfo, data);
       const { url } = result;
       if (url) {
         // courseIds.map(async (courseId) => {

@@ -80,7 +80,9 @@ const Sidebar = () => {
               {role === "user" && (
                 <>
                   <StudentMenu />
-                  <button>Become a Teacher</button>
+                  <button className="flex items-center px-4 py-2 my-4  transition-colors duration-300 transform  hover:backdrop-blur-sm hover:bg-white/10 text-white w-full  hover:text-gray-100">
+                    Become a Teacher
+                  </button>
                 </>
               )}
               {role === "teacher" ? (
