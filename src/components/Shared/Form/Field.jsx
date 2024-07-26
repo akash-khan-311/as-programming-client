@@ -8,7 +8,9 @@ const Field = ({ label, children, htmlFor, error, required }) => {
         <label
           htmlFor={id}
           className={`text-white text-sm font-semibold ${
-            required && 'after:content-["*"] after:ml-0.5 after:text-pink-500'
+            required
+              ? 'after:content-["*"] after:ml-0.5 after:text-pink-500'
+              : 'after:contents-["Optional"] after:ml-0.5 after:text-white'
           }`}
         >
           {label}

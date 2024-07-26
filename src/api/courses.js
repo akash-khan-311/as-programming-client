@@ -83,6 +83,16 @@ export const getAssignmentsForTeacher = async (email) => {
   return data;
 };
 
+// update assignment
+export const updateAssignment = async (id, assignmentData) => {
+  const data = await fetchSecure(
+    `/assignments/teacher/${id}`,
+    "PUT",
+    assignmentData
+  );
+  return data;
+};
+
 // Get Admissions course by id
 export const getCoursesById = async (id) => {
   const data = fetchSecure(`/admissions/course/${id}`);

@@ -6,6 +6,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import Loader from "@/components/Shared/Loader";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 const ManageCoursesForTeacher = () => {
   const { user } = useAuth();
@@ -120,9 +121,18 @@ const ManageCoursesForTeacher = () => {
                 </tbody>
               </table>
             ) : (
-              <h1 className="text-3xl md:text-4xl lg:text-5xl flex justify-center items-center text-center py-4">
-                You have not added any courses yet
-              </h1>
+              <div className="min-h-[calc(100vh-268px)] flex justify-center items-center flex-col">
+                <h1 className="text-3xl text-white  md:text-4xl lg:text-5xl  text-center py-4">
+                  You have not added any courses yet. Please add a course to
+                  manage it.
+                </h1>
+                <Link
+                  href={"/dashboard/add-course"}
+                  className="text-white bg-pink-600 px-4 py-2 flex items-center justify-center w-52 mx-auto rounded-full"
+                >
+                  Add Course
+                </Link>
+              </div>
             )}
           </div>
         </div>

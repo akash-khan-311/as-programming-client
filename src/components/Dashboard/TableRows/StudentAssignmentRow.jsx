@@ -38,7 +38,7 @@ const StudentAssignmentRow = ({ assignment }) => {
       </td>
       <td className="px-5 py-5 border-b border-gray-200 text-sm">
         <p className="text-white whitespace-no-wrap text-center">
-          {assignment.mark}
+          {assignment.mark === "pending" ? "Pending" : `${assignment.mark}/60`}
         </p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 text-sm">

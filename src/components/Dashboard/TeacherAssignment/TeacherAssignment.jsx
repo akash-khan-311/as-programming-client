@@ -85,13 +85,14 @@ const TeacherAssignment = () => {
                       <TeacherAssignmentRow
                         key={assignment._id}
                         assignment={assignment}
+                        refetch={refetch}
                       />
                     ))}
                 </tbody>
               </table>
             ) : (
-              <h1 className="text-3xl md:text-4xl lg:text-5xl flex justify-center items-center text-center py-4">
-                You have not Added a Pet yet
+              <h1 className="text-3xl min-h-[calc(100vh-268px)] text-white md:text-4xl lg:text-5xl flex justify-center items-center text-center py-4">
+                No Assignment Found
               </h1>
             )}
           </div>

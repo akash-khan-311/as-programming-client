@@ -1,11 +1,10 @@
 "use client";
 import { convertTimestampToDate } from "@/lib";
 import Image from "next/image";
-import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
 import Modal from "@/components/Shared/Modal";
-const TeacherAssignmentRow = ({ assignment }) => {
-  const [isOpen, setIsOpen] = useState(true);
+const TeacherAssignmentRow = ({ assignment, refetch }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const isOpenDialog = () => setIsOpen(!isOpen);
   console.log(assignment);
   const formattedDate = convertTimestampToDate(assignment.timestamp);
@@ -43,7 +42,7 @@ const TeacherAssignmentRow = ({ assignment }) => {
       </td>
       <td className="px-5 py-5 border-b border-gray-200 text-sm">
         <p className="text-white whitespace-no-wrap text-center">
-          {assignment.mark}
+          {assignment.mark === "pending" ? "Pennding" : `${assignment.mark}/60`}
         </p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 text-sm">
@@ -64,7 +63,12 @@ const TeacherAssignmentRow = ({ assignment }) => {
           Update
         </button>
       </td>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Modal
+        assignment={assignment}
+        refetch={refetch}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
     </tr>
   );
 };

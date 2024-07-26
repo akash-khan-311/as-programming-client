@@ -86,8 +86,8 @@ const MyCourseForTeacher = () => {
                   </tbody>
                 </table>
               ) : (
-                <h1 className="text-3xl md:text-4xl lg:text-5xl flex justify-center items-center text-center py-4">
-                  You have not Added a Pet yet
+                <h1 className="text-3xl text-white min-h-[calc(100vh-268px)] md:text-4xl lg:text-5xl flex justify-center items-center text-center py-4">
+                  You have not added a course yet
                 </h1>
               )}
             </div>

@@ -1,16 +1,34 @@
 import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import Field from "./Form/Field";
 import { useForm } from "react-hook-form";
+import { updateAssignment } from "@/api/courses";
 
-const Modal = ({ isOpen, setIsOpen }) => {
+import toast from "react-hot-toast";
+import Link from "next/link";
+
+const Modal = ({ assignment, isOpen, setIsOpen, refetch }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  console.log(assignment);
   const handleSubmitForm = async (formData) => {
-    console.log(formData);
+    try {
+      const assignmentData = {
+        mark: formData.mark,
+        feedback: formData.feedback,
+      };
+
+      // Save assignment data in database
+      const result = await updateAssignment(assignment._id, assignmentData);
+      console.log(result);
+      if (result.result.modifiedCount > 0 && result.result.acknowledged) {
+        toast.success("Assignment updated Successfully ❤️");
+        setIsOpen(false);
+        refetch();
+      }
+    } catch (error) {}
   };
   return (
     <Dialog
@@ -27,14 +45,46 @@ const Modal = ({ isOpen, setIsOpen }) => {
             transition
             className="w-full max-w-md rounded-xl bg-white/20 p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
           >
-            <DialogTitle as="h3" className="text-base/7 font-medium text-white">
-              Payment successful
+            <DialogTitle
+              as="h2"
+              className="text-2xl font-medium border-b pb-2 text-white"
+            >
+              {assignment.courseName}
             </DialogTitle>
-            <form onSubmit={handleSubmit(handleSubmitForm)}>
+            <div>
+              <div className="text-white">
+                <span className="font-semibold">Live Link : </span>
+                <span className="border-b">
+                  {assignment.assignment.liveLink}
+                </span>
+              </div>
+              <div className="text-white">
+                <span className="font-semibold">Code Link : </span>
+                <span className="border-b">
+                  {assignment.assignment.liveLink}
+                </span>
+              </div>
+              <div className="text-white">
+                <span className="font-semibold">Code Link : </span>
+                <span className="border-b">
+                  {assignment.assignment.serverCodeLink === ""
+                    ? " "
+                    : assignment.assignment.serverCodeLink}
+                </span>
+              </div>
+            </div>
+            <form
+              className="space-y-3 my-5"
+              onSubmit={handleSubmit(handleSubmitForm)}
+            >
               <Field required={true} label="Mark" error={errors.mark}>
                 <input
                   {...register("mark", {
                     required: "Mark is Required",
+                    max: {
+                      value: 60,
+                      message: "Mark Must be less than 60 characters",
+                    },
                   })}
                   type="number"
                   name="mark"
@@ -51,8 +101,8 @@ const Modal = ({ isOpen, setIsOpen }) => {
                   {...register("feedback", {
                     required: "Feedback is Required",
                     minLength: {
-                      value: 30,
-                      message: "Feedback must be at least 30 characters",
+                      value: 20,
+                      message: "Feedback must be at least 20 characters",
                     },
                   })}
                   name="feedback"
