@@ -33,14 +33,18 @@ const CourseCard = ({ id }) => {
       setLoading(true);
       const assignmentData = {
         assignment: formData.assignment,
+        courseName: singleCourse.title,
+        courseImg: singleCourse.img,
         assignmentId: singleCourse._id,
         studentName: user.displayName,
         studentEmail: user?.email,
         teacherName: singleCourse.teacher.name,
         teacherEmail: singleCourse.teacher.email,
+        mark: "pending",
+        feedback: "comming soon",
       };
       const result = await saveAssignments(assignmentData);
-      console.log(result);
+
       if (result.acknowledged && result.insertedId) {
         toast.success("Assignment Submit Successful 👍");
         setLoading(false);
@@ -53,23 +57,24 @@ const CourseCard = ({ id }) => {
   if (isLoading) {
     return <div className="text-4xl text-white">Course Comming.........</div>;
   }
-  console.log(singleCourse);
   return (
     <div className=" mx-auto">
-      <div className="flex flex-col  rounded-lg backdrop-blur-md bg-white/20 text-white min-h-52 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  md:flex-row">
-        <Image
-          width={300}
-          height={300}
-          className=" w-1/3 rounded-t-lg object-cover md:!rounded-none md:!rounded-l-lg"
-          src={singleCourse.img}
-          alt={singleCourse.title}
-        />
+      <div className="flex flex-col  rounded-lg backdrop-blur-md bg-white/20 text-white min-h-72 xl:flex-row">
+        <div className="xl:w-1/3 w-full ">
+          <Image
+            width={300}
+            height={300}
+            className="w-full h-full  rounded-t-lg  lg:!rounded-none lg:!rounded-l-lg"
+            src={singleCourse.img}
+            alt={singleCourse.title}
+          />
+        </div>
         <div className="flex justify-center flex-1 flex-col p-6">
           <h2 className="mb-2 text-xl md:text-2xl lg:text-3xl font-semibold text-blue-gray-900 my-3">
             {singleCourse.title}
           </h2>
 
-          <div className="flex flex-col gap-y-5">
+          <div className="flex flex-col gap-y-5 my-5">
             <button className="w-full transition-all duration-200 bg-pink-600 px-10 py-2 rounded-lg hover:bg-pink-500">
               Continue Course
             </button>

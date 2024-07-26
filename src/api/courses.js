@@ -72,6 +72,17 @@ export const admissionsCourses = async (email) => {
   return data;
 };
 
+// get assignment from db for students
+export const getAssignmentsForStudent = async (email) => {
+  const data = await fetchSecure(`/assignments/student/${email}`, "GET");
+  return data;
+};
+// get assignment from db for teacher
+export const getAssignmentsForTeacher = async (email) => {
+  const data = await fetchSecure(`/assignments/teacher/${email}`, "GET");
+  return data;
+};
+
 // Get Admissions course by id
 export const getCoursesById = async (id) => {
   const data = fetchSecure(`/admissions/course/${id}`);
