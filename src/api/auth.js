@@ -4,7 +4,7 @@ import fetchSecure from ".";
 export const saveUser = async (user) => {
   const currentUser = {
     email: user.email,
-    role: "user",
+    role: "student",
     status: "verified",
   };
   const data = await fetchSecure(`/users/${user?.email}`, "PUT", currentUser);

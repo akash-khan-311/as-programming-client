@@ -5,12 +5,15 @@ import { FaLaptopCode } from "react-icons/fa6";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
 import { GiNotebook } from "react-icons/gi";
-import useGetCourseCount from "@/hooks/useGetCourseCount";
-import useGetTeacherEarnings from "@/hooks/useGetTeacherEarnings";
-import useGetTotalStudentFotTeacher from "@/hooks/useGetTotalStudentFotTeacher";
-import useGetAssignmentCountForTeacher from "@/hooks/useGetAssignmentCountForTeacher";
+
 import EarningsChartForTeacher from "./Teacher/EarningChartForTeacher";
 import Loader from "@/components/Shared/Loader";
+import {
+  useGetAssignmentCountForTeacher,
+  useGetCourseCount,
+  useGetTeacherEarnings,
+  useGetTotalStudentFotTeacher,
+} from "@/hooks";
 
 const TeacherStatistics = () => {
   const [courseCount, isLoading] = useGetCourseCount();
@@ -19,7 +22,7 @@ const TeacherStatistics = () => {
   const [assignments] = useGetAssignmentCountForTeacher();
 
   if (isLoading) return <Loader />;
-  console.log(assignments);
+
   const totalCourse = courseCount.courseCount;
   const grandTotalEarnings = totalEarnings?.totalEarnings;
   const totalAssignment = assignments?.assignmentCount;

@@ -10,9 +10,10 @@ import {
   LinearScale,
   ArcElement,
 } from "chart.js";
-import useGetEarningsHistoryForTeacher from "@/hooks/useGetEarningHistoryForTeacher";
+
 import { convertTimestampToDate } from "@/lib";
 import Loader from "@/components/Shared/Loader";
+import { useGetEarningsHistoryForTeacher } from "@/hooks";
 
 ChartJS.register(
   LineElement,

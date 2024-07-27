@@ -1,8 +1,8 @@
 const Box = ({ icon: Icon, title, value }) => {
   return (
     <>
-      <div className="w-full p-4 backdrop-blur-md bg-white/20 rounded-xl">
-        <span className="">
+      <div className="w-full p-4 backdrop-blur-md bg-white/20 rounded-xl text-center">
+        <span className="mx-auto flex justify-center ">
           <Icon className="w-10 h-10  text-white" />
         </span>
         <div className="mt-3">

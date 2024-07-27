@@ -39,6 +39,20 @@ export const getStudentCourseCount = async (email) => {
   return data;
 };
 
+export const getAssignmentMarks = async (email) => {
+  const data = await fetchSecure(`/student/${email}/assignments/marks`);
+  return data;
+};
+
+export const getSubmittedAssignmetCount = async (email) => {
+  const data = await fetchSecure(`/student/${email}/assignments/count`);
+  return data;
+};
+
+export const getAverageAssignmentMark = async (email) => {
+  const data = await fetchSecure(`/student/${email}/assignments/average-mark`);
+  return data;
+};
 /*
 ============> Fot Admin <============
 */
