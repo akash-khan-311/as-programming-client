@@ -10,6 +10,7 @@ import useGetTeacherEarnings from "@/hooks/useGetTeacherEarnings";
 import useGetTotalStudentFotTeacher from "@/hooks/useGetTotalStudentFotTeacher";
 import useGetAssignmentCountForTeacher from "@/hooks/useGetAssignmentCountForTeacher";
 import EarningsChartForTeacher from "./Teacher/EarningChartForTeacher";
+import Loader from "@/components/Shared/Loader";
 
 const TeacherStatistics = () => {
   const [courseCount, isLoading] = useGetCourseCount();
@@ -17,7 +18,7 @@ const TeacherStatistics = () => {
   const [studentCount] = useGetTotalStudentFotTeacher();
   const [assignments] = useGetAssignmentCountForTeacher();
 
-  if (isLoading) return <div className="text-7xl text-white">Loading...</div>;
+  if (isLoading) return <Loader />;
   console.log(assignments);
   const totalCourse = courseCount.courseCount;
   const grandTotalEarnings = totalEarnings?.totalEarnings;
@@ -26,7 +27,7 @@ const TeacherStatistics = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 mt-14 md:mt-0">
         <Box title="Total Courses" value={totalCourse} icon={FaLaptopCode} />
         <Box title="Total Students" value={totalStudent} icon={PiStudentBold} />
         <Box

@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import useGetEarningsHistoryForTeacher from "@/hooks/useGetEarningHistoryForTeacher";
 import { convertTimestampToDate } from "@/lib";
+import Loader from "@/components/Shared/Loader";
 
 ChartJS.register(
   LineElement,
@@ -25,7 +26,7 @@ ChartJS.register(
 
 const EarningChartForTeacher = () => {
   const [earningsHistory, isLoading] = useGetEarningsHistoryForTeacher();
-  if (isLoading) return <div className="text-7xl text-white">Loading...</div>;
+  if (isLoading) return <Loader />;
 
   // Assuming earningsHistory is an array of objects with date and amount
   const lineChartData = {
@@ -44,11 +45,33 @@ const EarningChartForTeacher = () => {
     ],
   };
 
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+      },
+    },
+    scales: {
+      x: {
+        type: "category",
+        title: {
+          display: true,
+          text: "Date",
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: "Earnings",
+        },
+      },
+    },
+  };
+
   return (
-    <div className="w-full h-full flex  backdrop-blur-lg bg-white/20 rounded-xl mt-10">
-      <div className="">
-        <Line data={lineChartData} options={{ responsive: true }} />
-      </div>
+    <div className="w-full h-full flex  backdrop-blur-sm bg-white/60 rounded-xl mt-10">
+      <Line data={lineChartData} options={chartOptions} />
     </div>
   );
 };
