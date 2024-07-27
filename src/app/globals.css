@@ -48,6 +48,32 @@ section {
 .btn:hover {
   background-position: right center;
   /* change the direction of the change here */
-  color: #fff;
+  color: #ffffff23;
   text-decoration: none;
+}
+
+
+/* For Webkit browsers like Chrome and Safari */
+::-webkit-scrollbar {
+  width: 12px;
+  /* Adjust width as needed */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(226, 224, 224, 0.911);
+  /* Semi-transparent background for the track */
+  backdrop-filter: blur(10px);
+  /* Apply blur effect */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 99, 99, 0.425);
+  /* Semi-transparent thumb */
+  border-radius: 10px;
+  /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.6);
+  /* Darker thumb on hover */
 }

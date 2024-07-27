@@ -49,6 +49,8 @@ const CartList = () => {
     return totalPrice;
   };
 
+  const totalPrice = getTotalPrice();
+
   if (isLoading) return <Loader />;
   console.log(cartItems);
   return (
@@ -123,12 +125,13 @@ const CartList = () => {
           <p className="font-normal text-base leading-7 text-white text-center mb-5 mt-6">
             Shipping taxes, and discounts calculated at checkout
           </p>
-          <Link
-            href={"/checkout"}
-            disabled={getTotalPrice() === 0}
-            className="rounded-full flex justify-center py-4 px-6 bg-pink-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold text-lg  text-center transition-all duration-500 hover:bg-pink-700 "
-          >
-            Checkout
+          <Link href={"/checkout"}>
+            <button
+              disabled={totalPrice === 0 && cartItems.length === 0}
+              className="rounded-full w-full flex justify-center py-4 px-6 bg-pink-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold text-lg  text-center transition-all duration-500 hover:bg-pink-700 "
+            >
+              Checkout
+            </button>
           </Link>
         </div>
       </div>
