@@ -38,6 +38,7 @@ const CourseCard = ({ id }) => {
           codeLink: formData.code,
           serverCodeLink: formData.server,
         },
+       teacherEmail: singleCourse.teacher.email,
         courseName: singleCourse.title,
         courseImg: singleCourse.img,
         assignmentId: singleCourse._id,

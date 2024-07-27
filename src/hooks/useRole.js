@@ -1,6 +1,8 @@
 "use client";
+
+import { useQuery } from "react-query";
 import useAuth from "./useAuth";
-import { getRole } from "../api/auth";
+import { getRole } from "@/api/auth";
 
 const useRole = () => {
   const { user, loading } = useAuth();

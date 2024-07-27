@@ -18,21 +18,13 @@ import TeacherMenu from "../Menu/TeacherMenu";
 
 import { getRole } from "@/api/auth";
 import AdminMenu from "../Menu/AdminMenu";
+import useRole from "@/hooks/useRole";
 
 const Sidebar = () => {
   const { user, logOut } = useAuth();
   const [toggle, setToggle] = useState(false);
   const [isActive, setActive] = useState(false);
-  const [role, setRole] = useState(null);
-
-  useEffect(() => {
-    const getRoleFromDb = async () => {
-      const role = await getRole(user?.email);
-      setRole(role);
-    };
-
-    getRoleFromDb();
-  }, [user.email]);
+  const [role] = useRole();
 
   //   For guest/host menu item toggle button
   const toggleHandler = (event) => {
@@ -77,7 +69,7 @@ const Sidebar = () => {
 
             <nav>
               {role === "admin" && <AdminMenu />}
-              {role === "user" && (
+              {role === "student" && (
                 <>
                   <StudentMenu />
                   <button className="flex items-center px-4 py-2 my-4  transition-colors duration-300 transform  hover:backdrop-blur-sm hover:bg-white/10 text-white w-full  hover:text-gray-100">

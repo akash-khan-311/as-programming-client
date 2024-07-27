@@ -11,6 +11,21 @@ export const getTeacherEarnings = async (email) => {
   const data = await fetchSecure(`/teacher/${email}/earnings`);
   return data;
 };
+
+export const getStudentCountForTeacher = async (email) => {
+  const data = await fetchSecure(`/teacher/${email}/students/count`);
+  return data;
+};
+
+export const getAssignmentCount = async (email) => {
+  const data = await fetchSecure(`/teacher/${email}/assignment/count`);
+  return data;
+};
+
+export const getEarningsHistory = async (email) => {
+  const data = await fetchSecure(`/teacher/${email}/earnings/history`);
+  return data;
+};
 /*
 ============> Fot Student <============
 */

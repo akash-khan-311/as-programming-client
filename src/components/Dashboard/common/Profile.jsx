@@ -11,38 +11,35 @@ import { FaCamera } from "react-icons/fa6";
 const Profile = () => {
   const { user, updateUserProfileImage } = useAuth();
   const [role, setRole] = useState(null);
-  const [coverPhoto, setCoverPhoto] = useState(
-    "https://img.freepik.com/free-photo/light-gray-abstract-background_53876-101909.jpg"
-  );
+
   const [loading, setLoading] = useState(false);
-  console.log(coverPhoto);
+
   const [profileImage, setProfileImage] = useState(
     user.photoURL ||
       "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png"
   );
   const imageRef = useRef(null);
-  const coverImgRef = useRef(null);
 
-  const handleCoverImgChange = async () => {
-    try {
-      const file = coverImgRef.current.files[0];
-      console.log(file);
-      if (file) {
-        const data = await imageUpload(file);
-        if (!data) {
-          toast.error("Image not found");
-        }
-        const imgUrl = data.data.display_url;
-        console.log(imgUrl);
-        const result = await updateUserCoverImg(user?.email, imgUrl);
-        console.log(result);
-      } else {
-        toast.error("Please select an image");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleCoverImgChange = async () => {
+  //   try {
+  //     const file = coverImgRef.current.files[0];
+  //     console.log(file);
+  //     if (file) {
+  //       const data = await imageUpload(file);
+  //       if (!data) {
+  //         toast.error("Image not found");
+  //       }
+  //       const imgUrl = data.data.display_url;
+  //       console.log(imgUrl);
+  //       const result = await updateUserCoverImg(user?.email, imgUrl);
+  //       console.log(result);
+  //     } else {
+  //       toast.error("Please select an image");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const handleFileChange = async () => {
     try {
       setLoading(true);
@@ -75,19 +72,19 @@ const Profile = () => {
       const role = await getRole(user?.email);
       setRole(role);
     };
-    const getCoverImg = async () => {
-      const coverImg = await getUserCoverImg(user?.email);
-      if (!coverImg) {
-        toast.error("Image not found");
-        setCoverPhoto(
-          "https://img.freepik.com/free-photo/light-gray-abstract-background_53876-101909.jpg"
-        );
-      }
+    // const getCoverImg = async () => {
+    //   const coverImg = await getUserCoverImg(user?.email);
+    //   if (!coverImg) {
+    //     toast.error("Image not found");
+    //     setCoverPhoto(
+    //       "https://img.freepik.com/free-photo/light-gray-abstract-background_53876-101909.jpg"
+    //     );
+    //   }
 
-      setCoverPhoto(coverImg);
-    };
+    //   setCoverPhoto(coverImg);
+    // };
 
-    getCoverImg();
+    // getCoverImg();
     getRoleFromDb();
   }, [user.email]);
 
@@ -96,7 +93,9 @@ const Profile = () => {
       <div className="overflow-hidden rounded-sm border border-stroke backdrop-blur-lg bg-white/10 shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="relative -z-20 h-[140px] md:h-72">
           <Image
-            src={coverPhoto}
+            src={
+              "https://img.freepik.com/free-photo/light-gray-abstract-background_53876-101909.jpg"
+            }
             alt="profile cover"
             className="h-full w-full rounded-tl-sm rounded-tr-sm object-cover object-center"
             width={970}
@@ -108,8 +107,8 @@ const Profile = () => {
               className="flex cursor-pointer items-center justify-center gap-2 rounded bg-primary px-2 py-1 text-sm font-medium text-white hover:bg-opacity-80 xsm:px-4"
             >
               <input
-                ref={coverImgRef}
-                onChange={handleCoverImgChange}
+                // ref={coverImgRef}
+                // onChange={handleCoverImgChange}
                 type="file"
                 name="cover"
                 id="cover"
