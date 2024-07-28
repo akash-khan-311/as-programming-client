@@ -8,10 +8,14 @@ import {
 import useAuth from "@/hooks/useAuth";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import useRole from "@/hooks/useRole";
+import Swal from "sweetalert2";
 
 const HandleAddToCart = ({ id }) => {
   const queryClient = useQueryClient();
   const { user } = useAuth();
+  const [role] = useRole();
+  console.log(role);
 
   // Fetch user's cart items
   const { data: cartItems } = useQuery({
@@ -55,6 +59,14 @@ const HandleAddToCart = ({ id }) => {
   // Handle adding/removing course from cart
   const handleAddToCart = async () => {
     try {
+      if (role === "teacher" || role === "admin") {
+        Swal.fire({
+          title: "You are not allowed to add courses to cart.",
+          text: `Because You are ${role === "teacher" ? "Teacher" : "Admin"}`,
+          icon: "error",
+        });
+        return;
+      }
       if (inCart) {
         await mutateRemoveFromCart(id);
       } else {

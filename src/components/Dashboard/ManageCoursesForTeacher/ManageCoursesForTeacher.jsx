@@ -70,7 +70,7 @@ const ManageCoursesForTeacher = () => {
                       scope="col"
                       className="px-8  font-bold py-3 text-left text-white uppercase tracking-wider "
                     >
-                      Course Title
+                      Course
                     </th>
                     <th
                       scope="col"

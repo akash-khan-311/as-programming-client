@@ -10,10 +10,10 @@ import { AiOutlineBars } from "react-icons/ai";
 import useAuth from "@/hooks/useAuth";
 import Image from "next/image";
 import StudentMenu from "../Menu/StudentMenu";
-import Link from "next/link";
+
 import Logo from "@/components/Shared/Logo";
 import MenuItem from "../MenuItem/MenuItem";
-import ToggleButton from "@/components/Buttons/ToggleButton";
+
 import TeacherMenu from "../Menu/TeacherMenu";
 
 import { getRole } from "@/api/auth";
@@ -22,14 +22,12 @@ import useRole from "@/hooks/useRole";
 
 const Sidebar = () => {
   const { user, logOut } = useAuth();
-  const [toggle, setToggle] = useState(false);
+
   const [isActive, setActive] = useState(false);
   const [role] = useRole();
 
   //   For guest/host menu item toggle button
-  const toggleHandler = (event) => {
-    setToggle(event.target.checked);
-  };
+
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
@@ -62,11 +60,6 @@ const Sidebar = () => {
           <div className="flex flex-col justify-between flex-1 mt-6 ">
             {/* <MenuItems /> */}
 
-            {/* If a user is a teacher  */}
-            {role === "teacher" && (
-              <ToggleButton toggleHandler={toggleHandler} />
-            )}
-
             <nav>
               {role === "admin" && <AdminMenu />}
               {role === "student" && (
@@ -77,15 +70,7 @@ const Sidebar = () => {
                   </button>
                 </>
               )}
-              {role === "teacher" ? (
-                toggle ? (
-                  <TeacherMenu />
-                ) : (
-                  <StudentMenu />
-                )
-              ) : (
-                ""
-              )}
+              {role === "teacher" && <TeacherMenu />}
               {/* {role === "admin" && <AdminMenu />} */}
             </nav>
           </div>

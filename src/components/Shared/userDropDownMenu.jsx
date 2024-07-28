@@ -10,10 +10,13 @@ import { CgProfile } from "react-icons/cg";
 import { FaCartShopping } from "react-icons/fa6";
 import { useQuery } from "react-query";
 import { getUserCartItems } from "@/api/courses";
+import useRole from "@/hooks/useRole";
 
 const UserDropDownMenu = () => {
   const [open, setOpen] = useState(false);
   const { logOut, user } = useAuth();
+  const [role] = useRole();
+  // Fetch user's cart items
   const { data: cartItems } = useQuery(
     ["cartItems", user?.email],
     async () => await getUserCartItems(user?.email),
@@ -52,20 +55,22 @@ const UserDropDownMenu = () => {
                 <span className="text-sm ml-2">Dashboard</span>
               </Link>
             </li>
-            <li className=" hover:backdrop-blur-md hover:bg-white/10 transition-all  pt-[9px] pb-2 px-3 mt-2">
-              <Link
-                href="/dashboard/bookmarks"
-                className="flex items-center justify-between transition-colors "
-              >
-                <div className="flex items-center">
-                  <FaCartShopping className="text-lg" />
-                  <span className="text-lg ml-2">Cart</span>
-                </div>
-                <span className="text-black bg-red-200 text-sm p-1 rounded-full w-6 h-6 flex items-center justify-center">
-                  {cartItemCount}
-                </span>
-              </Link>
-            </li>
+            {role === "student" && (
+              <li className=" hover:backdrop-blur-md hover:bg-white/10 transition-all  pt-[9px] pb-2 px-3 mt-2">
+                <Link
+                  href="/dashboard/bookmarks"
+                  className="flex items-center justify-between transition-colors "
+                >
+                  <div className="flex items-center">
+                    <FaCartShopping className="text-lg" />
+                    <span className="text-lg ml-2">Cart</span>
+                  </div>
+                  <span className="text-black bg-red-200 text-sm p-1 rounded-full w-6 h-6 flex items-center justify-center">
+                    {cartItemCount}
+                  </span>
+                </Link>
+              </li>
+            )}
             <li className=" hover:backdrop-blur-md hover:bg-white/10 transition-all  pt-[9px] pb-2 px-3 mt-2">
               <Link
                 href="/dashboard/profile"

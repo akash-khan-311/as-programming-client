@@ -34,11 +34,13 @@ const TeacherStatistics = () => {
         <Box title="Total Courses" value={totalCourse} icon={FaLaptopCode} />
         <Box title="Total Students" value={totalStudent} icon={PiStudentBold} />
         <Box
+          loading={isLoading}
           title="Total Assignments"
           value={totalAssignment}
           icon={GiNotebook}
         />
         <Box
+          loading={isLoading}
           title="Total Earnings"
           value={`৳ ${grandTotalEarnings}`}
           icon={FaMoneyBillWave}

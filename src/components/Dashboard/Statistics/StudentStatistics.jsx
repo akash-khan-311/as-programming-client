@@ -9,7 +9,6 @@ import {
   useGetPurchasedCourseCount,
   useGetSubmittedAssignmentCount,
 } from "@/hooks";
-import Loader from "@/app/dashboard/loading";
 
 const StudentStatistics = async () => {
   const [courseCount, isLoading] = useGetPurchasedCourseCount();
@@ -27,21 +26,29 @@ const StudentStatistics = async () => {
       <div className="">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 mt-14 md:mt-0">
           <Box
+            loading={isLoading}
             title="Course Enrolled"
             value={totalCourse}
             icon={FaLaptopCode}
           />
           <Box
+            loading={isLoading}
             title="Assignment Submitted"
             value={totalAssignment}
             icon={GiNotebook}
           />
           <Box
+            loading={isLoading}
             title="Avarage Mark"
             value={totalAvarageMark}
             icon={IoCheckmarkDoneCircle}
           />
-          <Box title="Grade" value={averageMark?.batch} icon={SlBadge} />
+          <Box
+            loading={isLoading}
+            title="Grade"
+            value={averageMark?.batch}
+            icon={SlBadge}
+          />
         </div>
         <PieChart />
       </div>

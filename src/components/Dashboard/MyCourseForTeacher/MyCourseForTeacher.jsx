@@ -42,7 +42,7 @@ const MyCourseForTeacher = () => {
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
             <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
               {courses.length ? (
-                <table className="min-w-full leading-normal">
+                <table className="min-w-full leading-normal ">
                   <thead className="border-b backdrop-blur-lg bg-white/20">
                     <tr>
                       <th

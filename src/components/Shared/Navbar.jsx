@@ -17,12 +17,14 @@ import { FaCartShopping } from "react-icons/fa6";
 import { useQuery } from "react-query";
 import { getUserCartItems } from "@/api/courses";
 import Loader from "./Loader";
+import useRole from "@/hooks/useRole";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [header, setHeader] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const [role] = useRole();
   const isDashboard = pathname.startsWith("/dashboard");
 
   // Fetch cart items count using React Query
@@ -100,20 +102,22 @@ const Navbar = () => {
                           <span className="text-lg ml-2">Dashboard</span>
                         </li>
                       </Link>
-                      <Link
-                        href="/cart"
-                        className=" flex items-center justify-between transition-colors"
-                      >
-                        <li className=" text-gray-500 hover:bg-gray-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center justify-between w-full">
-                          <div className="flex items-center">
-                            <FaCartShopping className="text-lg" />
-                            <span className="text-lg ml-2">Cart</span>
-                          </div>
-                          <span className="text-black bg-red-200 text-sm p-1 rounded-full w-6 h-6 flex items-center justify-center">
-                            {cartItemCount}
-                          </span>
-                        </li>
-                      </Link>
+                      {role === "student" && (
+                        <Link
+                          href="/cart"
+                          className=" flex items-center justify-between transition-colors"
+                        >
+                          <li className=" text-gray-500 hover:bg-gray-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center justify-between w-full">
+                            <div className="flex items-center">
+                              <FaCartShopping className="text-lg" />
+                              <span className="text-lg ml-2">Cart</span>
+                            </div>
+                            <span className="text-black bg-red-200 text-sm p-1 rounded-full w-6 h-6 flex items-center justify-center">
+                              {cartItemCount}
+                            </span>
+                          </li>
+                        </Link>
+                      )}
                       <Link
                         href="/dashboard/profile"
                         className=" flex items-center transition-colors"

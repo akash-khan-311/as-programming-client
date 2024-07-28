@@ -8,10 +8,14 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import Link from "next/link";
 import Loader from "../Shared/Loader";
 import toast from "react-hot-toast";
+import useRole from "@/hooks/useRole";
+import { useRouter } from "next/navigation";
 
 const CartList = () => {
   const queryClient = useQueryClient();
   const { user } = useAuth();
+  const [role] = useRole();
+  const router = useRouter();
   // Fetch cart items count using React Query
   const {
     data: cartItems,
@@ -52,7 +56,10 @@ const CartList = () => {
   const totalPrice = getTotalPrice();
 
   if (isLoading) return <Loader />;
-  console.log(cartItems);
+  if (role === "teacher" || role === "admin") {
+    toast.error("Get Out Of Here 😒");
+    router.push("/");
+  }
   return (
     <section className="py-24 relative">
       <div className="w-full px-4 md:px-5 lg-6 mx-auto backdrop-blur-sm bg-white/10 rounded-3xl py-10">

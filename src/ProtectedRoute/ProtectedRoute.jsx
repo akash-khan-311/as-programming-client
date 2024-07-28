@@ -7,6 +7,7 @@ import Loader from "@/components/Shared/Loader";
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
+
   const router = useRouter();
   const pathName = usePathname();
 

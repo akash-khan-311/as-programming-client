@@ -11,7 +11,6 @@ const PieChart = () => {
   const [marksDistribution, isLoadingMarks] = useGetAssignmentMarks();
   const [courseCount, isLoadingCourses] = useGetPurchasedCourseCount();
 
-  console.log(marksDistribution);
   const hasMarksData =
     marksDistribution?.marksDistribution &&
     Object.keys(marksDistribution.marksDistribution).length > 0;
@@ -50,7 +49,13 @@ const PieChart = () => {
     <div className="w-full  flex flex-col items-center justify-center backdrop-blur-2xl bg-white/5 p-6 rounded-xl mt-5">
       <h2 className="text-2xl text-white mb-6">Student Statistics</h2>
       <div className="w-1/2 h-1/2 mb-6">
-        <Pie data={pieChartData} options={{ responsive: true }} />
+        {isLoadingMarks || isLoadingCourses ? (
+          <h1 className="text-lg md:text-xl lg:text-2xl text-white">
+            Comming.. Please Wait
+          </h1>
+        ) : (
+          <Pie data={pieChartData} options={{ responsive: true }} />
+        )}
       </div>
       <div className="text-white">
         <h3 className="text-xl">
