@@ -28,6 +28,7 @@ export const getAllUsers = async () => {
   const data = await fetchSecure("/users", "GET");
   return data;
 };
+
 // Get user role
 export const getRole = async (email) => {
   const data = await fetchSecure(`/user/${email}`, "GET");

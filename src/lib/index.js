@@ -1,6 +1,10 @@
 import { getRole } from "@/api/auth";
 import axios from "axios";
-
+import {
+  differenceInYears,
+  differenceInMonths,
+  differenceInDays,
+} from "date-fns";
 export const imageUpload = async (image) => {
   try {
     const imageFormData = new FormData();
