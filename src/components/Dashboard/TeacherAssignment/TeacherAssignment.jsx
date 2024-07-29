@@ -29,7 +29,7 @@ const TeacherAssignment = () => {
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-          <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+          <div className="inline-block min-w-full shadow  overflow-hidden">
             {assignments.length ? (
               <div className="min-w-full leading-normal">
                 <div className="flex flex-col gap-y-10">

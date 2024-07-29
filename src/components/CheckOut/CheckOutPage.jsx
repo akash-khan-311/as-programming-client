@@ -72,6 +72,7 @@ const CheckOutPage = () => {
     try {
       const result = await completePurchase(user?.email, courseInfo, data);
       const { url } = result;
+      console.log(result);
       if (url) {
         // courseIds.map(async (courseId) => {
         //   const result = await removeCourseFromCart(courseId, user?.email);

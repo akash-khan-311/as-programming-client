@@ -1,9 +1,13 @@
+"use client";
+import SeeAssignmentDetailModal from "@/components/Shared/SeeAssignmentDetailModal";
 import { convertTimestampToDate } from "@/lib";
 import Image from "next/image";
+import { useState } from "react";
 
 const StudentAssignmentRow = ({ assignment }) => {
   console.log(assignment);
   const formattedDate = convertTimestampToDate(assignment.timestamp);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200  text-sm">
@@ -36,19 +40,27 @@ const StudentAssignmentRow = ({ assignment }) => {
           {assignment.studentEmail}
         </p>
       </td>
-      <td className="px-5 py-5 border-b border-gray-200 text-sm">
-        <p className="text-white whitespace-no-wrap text-center">
-          {assignment.mark === "pending" ? "Pending" : `${assignment.mark}/60`}
-        </p>
-      </td>
-      <td className="px-5 py-5 border-b border-gray-200 text-sm">
-        <p className={`text-white whitespace-no-wrap text-center `}>
-          {assignment.feedback}
-        </p>
-      </td>
+
       <td className="px-5 py-5 border-b border-gray-200 text-sm">
         <p className={`text-white whitespace-no-wrap text-center `}>
           {formattedDate}
+        </p>
+      </td>
+      <td className="px-5 py-5 border-b border-gray-200 text-sm">
+        <p className={`text-white whitespace-no-wrap text-center `}>
+          {assignment.mark === "pending" ? (
+            <button className="w-20 bg-pink-600 text-white rounded-md">
+              Comming
+            </button>
+          ) : (
+            <>
+              <SeeAssignmentDetailModal
+                assignment={assignment}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+              />
+            </>
+          )}
         </p>
       </td>
     </tr>

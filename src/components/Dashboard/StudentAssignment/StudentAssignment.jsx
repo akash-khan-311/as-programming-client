@@ -42,32 +42,25 @@ const StudentAssignment = () => {
                       scope="col"
                       className="px-8  font-semibold py-3 text-left text-white uppercase tracking-wider "
                     >
-                      Student Name
+                      Name
                     </th>
                     <th
                       scope="col"
                       className="px-8  font-semibold py-3 text-left text-white uppercase tracking-wider "
                     >
-                      Student Email
+                      Email
                     </th>
-                    <th
-                      scope="col"
-                      className="px-8  font-semibold py-3 text-left text-white uppercase tracking-wider "
-                    >
-                      Mark
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-8  font-semibold py-3 text-left text-white uppercase tracking-wider "
-                    >
-                      Feedback
-                    </th>
+
                     <th
                       scope="col"
                       className="px-8  font-semibold py-3 text-left text-white uppercase tracking-wider "
                     >
                       Submition Date
                     </th>
+                    <th
+                      scope="col"
+                      className="px-8  font-semibold py-3 text-left text-white uppercase tracking-wider "
+                    ></th>
                   </tr>
                 </thead>
                 <tbody className=" backdrop-blur-sm bg-white/10 divide-y divide-gray-200">
