@@ -32,11 +32,10 @@ const RegsiterForm = () => {
     formState: { errors },
   } = useForm();
   const submitForm = async (formData) => {
-    console.log(formData);
-
     try {
+      const fullName = formData.fName + " " + formData.lName;
       const result = await createUser(formData.email, formData.password);
-      await updateUserProfileName(formData.name);
+      await updateUserProfileName(fullName);
       // Save user in database
       await saveUser(result?.user);
 
@@ -96,21 +95,46 @@ const RegsiterForm = () => {
                   className="space-y-4 md:space-y-6"
                   action="#"
                 >
-                  <Field required={true} label="Name" error={errors.name}>
-                    <input
-                      {...register("name", {
-                        required: "Full Name is Required",
-                      })}
-                      type="text"
-                      name="name"
-                      id="name"
-                      placeholder="Enter Your Full Name"
-                      className={`backdrop-blur-sm ${
-                        !!errors.name ? "border-red-500" : "border-white "
-                      } bg-white/10 border   sm:text-sm rounded-lg my-2 focus:outline-none block w-full p-2.5   text-white "
+                  <div className="flex flex-col md:flex-row md:justify-between  md:items-center md:gap-5">
+                    <Field
+                      required={true}
+                      label="First Name"
+                      error={errors.fName}
+                    >
+                      <input
+                        {...register("fName", {
+                          required: "First Name is Required",
+                        })}
+                        type="text"
+                        name="fName"
+                        id="fName"
+                        placeholder="Your First Name"
+                        className={`backdrop-blur-sm ${
+                          !!errors.fName ? "border-red-500" : "border-white "
+                        } bg-white/10 border   sm:text-sm rounded-lg my-2 focus:outline-none block w-full p-2.5   text-white "
                     `}
-                    />
-                  </Field>
+                      />
+                    </Field>
+                    <Field
+                      required={true}
+                      label="Last Name"
+                      error={errors.lName}
+                    >
+                      <input
+                        {...register("lName", {
+                          required: "Last Name is Required",
+                        })}
+                        type="text"
+                        name="lName"
+                        id="lName"
+                        placeholder="Enter Your Full Name"
+                        className={`backdrop-blur-sm ${
+                          !!errors.lName ? "border-red-500" : "border-white "
+                        } bg-white/10 border   sm:text-sm rounded-lg my-2 focus:outline-none block w-full p-2.5   text-white "
+                    `}
+                      />
+                    </Field>
+                  </div>
                   <Field required={true} label="Email" error={errors.email}>
                     <input
                       {...register("email", {
@@ -170,7 +194,7 @@ const RegsiterForm = () => {
                   </div>
                   <button
                     type="submit"
-                    className="btn py-2 text-white font-semibold w-full"
+                    className="btn py-2 text-white font-semibold w-full hover:text-white"
                   >
                     {loading ? "Loading..." : "Register"}
                   </button>
@@ -178,7 +202,7 @@ const RegsiterForm = () => {
                     have an account?{" "}
                     <Link
                       href={`/login?redirect=${redirectTo}`}
-                      className="font-medium text-primary-600 hover:underline dark:text-primary-500 "
+                      className="font-medium hover:underline dark:text-primary-500 "
                     >
                       Login
                     </Link>
@@ -188,7 +212,7 @@ const RegsiterForm = () => {
                 {/* Social Login */}
                 <button
                   onClick={handleGoogleLogin}
-                  className="flex justify-center items-center w-full mx-auto bg-white border border-gray-300 rounded-lg shadow-md  px-6 py-2 text-lg font-medium text-gray-800 hover:bg-gray-200 focus:outline-none "
+                  className="flex justify-center items-center w-full mx-auto bg-white border border-gray-300 rounded-lg shadow-md  px-6 py-2  font-medium text-gray-800 hover:bg-gray-200 focus:outline-none "
                 >
                   {loading ? (
                     "Loading..."

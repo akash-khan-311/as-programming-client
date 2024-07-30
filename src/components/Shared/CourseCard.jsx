@@ -30,7 +30,7 @@ const CourseCard = ({ data }) => {
         <span>Duration: {duration} Month</span>
       </div>
       <Link
-        className="bottom-5 w-full  absolute btn   py-2 text-sm"
+        className="bottom-5 w-full  absolute btn  hover:text-white py-2 text-sm"
         href={`/course/${_id}`}
       >
         View Details

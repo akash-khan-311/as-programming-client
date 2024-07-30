@@ -67,8 +67,10 @@ export const removeCourse = async (id) => {
 };
 
 // Get Admissions course by email
-export const admissionsCourses = async (email) => {
-  const data = await fetchSecure(`/admissions/${email}`);
+export const admissionsCourses = async (email, page = 1, limit = 10) => {
+  const data = await fetchSecure(
+    `/admissions/${email}?page=${page}&limit=${limit}`
+  );
   return data;
 };
 

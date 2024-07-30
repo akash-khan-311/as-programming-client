@@ -3,11 +3,20 @@ import SeeAssignmentDetailModal from "@/components/Shared/SeeAssignmentDetailMod
 import { convertTimestampToDate } from "@/lib";
 import Image from "next/image";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const StudentAssignmentRow = ({ assignment }) => {
   console.log(assignment);
   const formattedDate = convertTimestampToDate(assignment.timestamp);
   const [isOpen, setIsOpen] = useState(false);
+  const handleCommingButton = () => {
+    Swal.fire({
+      title: "Please Wait...😊",
+      text: "Your Assignment Beeing Processing",
+      icon: "success",
+    });
+  };
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200  text-sm">
@@ -49,7 +58,10 @@ const StudentAssignmentRow = ({ assignment }) => {
       <td className="px-5 py-5 border-b border-gray-200 text-sm">
         <p className={`text-white whitespace-no-wrap text-center `}>
           {assignment.mark === "pending" ? (
-            <button className="w-20 bg-pink-600 text-white rounded-md">
+            <button
+              onClick={handleCommingButton}
+              className="w-20 bg-pink-600 text-white rounded-md"
+            >
               Comming
             </button>
           ) : (

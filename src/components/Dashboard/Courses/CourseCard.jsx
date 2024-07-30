@@ -38,7 +38,7 @@ const CourseCard = ({ id }) => {
           codeLink: formData.code,
           serverCodeLink: formData.server,
         },
-       teacherEmail: singleCourse.teacher.email,
+        teacherEmail: singleCourse.teacher.email,
         courseName: singleCourse.title,
         courseImg: singleCourse.img,
         assignmentId: singleCourse._id,
@@ -61,10 +61,27 @@ const CourseCard = ({ id }) => {
   };
 
   if (isLoading) {
-    return <div className="text-4xl text-white">Course Comming.........</div>;
+    return (
+      <div className=" lg:w-3/4  mx-auto">
+        <div className="flex flex-col rounded-lg backdrop-blur-md bg-gray-300 animate-pulse min-h-72 xl:flex-row">
+          <div className="xl:w-1/3 w-full">
+            <div className="w-full h-full rounded-t-lg lg:rounded-none lg:rounded-l-lg bg-gray-400"></div>
+          </div>
+          <div className="flex justify-center flex-1 flex-col p-6">
+            <div className="h-8 bg-gray-400 rounded mb-2"></div>
+            <div className="h-6 bg-gray-400 rounded mb-2"></div>
+
+            <div className="flex flex-col gap-y-5 my-5">
+              <div className="w-full h-10 bg-gray-400 rounded-lg"></div>
+              <div className="w-full h-10 bg-gray-400 rounded-lg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
-    <div className=" mx-auto">
+    <div className=" w-full lg:w-3/4  mx-auto">
       <div className="flex flex-col  rounded-lg backdrop-blur-md bg-white/20 text-white min-h-72 xl:flex-row">
         <div className="xl:w-1/3 w-full ">
           <Image
@@ -79,8 +96,10 @@ const CourseCard = ({ id }) => {
           <h2 className="mb-2 text-xl md:text-2xl lg:text-3xl font-semibold text-blue-gray-900 my-3">
             {singleCourse.title}
           </h2>
-
-          <div className="flex flex-col gap-y-5 my-5">
+          <div>
+            <p>From now , You can Continue The Course and Submit Assignment</p>
+          </div>
+          <div className="flex flex-col lg:flex-row gap-5 my-5">
             <button className="w-full transition-all duration-200 bg-pink-600 px-10 py-2 rounded-lg hover:bg-pink-500">
               Continue Course
             </button>

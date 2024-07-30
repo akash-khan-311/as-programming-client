@@ -2,47 +2,60 @@
 
 import { admissionsCourses } from "@/api/courses";
 import useAuth from "@/hooks/useAuth";
-
-import { useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
 import CourseCard from "./CourseCard";
-import Loader from "@/components/Shared/Loader";
 import Link from "next/link";
+import { useEffect } from "react";
+import Loader from "@/components/Shared/Loader";
 
 const Courses = () => {
   const { user } = useAuth();
 
-  // Fetch admissions courses
-  const {
-    data: courses,
-    refetch,
-    isLoading,
-  } = useQuery(
-    ["courses", user?.email],
-    async () => await admissionsCourses(user?.email),
-    {
-      enabled: !!user?.email, // Only fetch if user email is available
-    }
-  );
+  // Fetch admissions courses with infinite scroll
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
+    useInfiniteQuery(
+      ["courses", user?.email],
+      async ({ pageParam = 0 }) =>
+        await admissionsCourses(user?.email, pageParam, 2),
+      {
+        enabled: !!user?.email, // Only fetch if user email is available
+        getNextPageParam: (lastPage, pages) =>
+          lastPage.hasNextPage ? pages.length + 1 : false,
+      }
+    );
 
-  console.log(courses);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 1 >=
+        document.documentElement.scrollHeight
+      ) {
+        if (hasNextPage) fetchNextPage();
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [hasNextPage, fetchNextPage]);
 
   if (isLoading) {
-    return <div className="text-4xl text-white">Loading.........</div>;
+    return <Loader />;
   }
 
   return (
     <>
-      {courses.length ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 my-10">
-          {courses?.map((course) =>
-            course.courseInfo.map((info) => (
-              <CourseCard key={info.courseId} id={info.courseId} />
-            ))
+      {data?.pages?.flat().length ? (
+        <div className="flex flex-col justify-center items-center gap-10 my-10">
+          {data.pages.map((page, pageIndex) =>
+            page.courses.map((course, courseIndex) =>
+              course.courseInfo.map((info) => (
+                <CourseCard key={info.courseId} id={info.courseId} />
+              ))
+            )
           )}
         </div>
       ) : (
-        <div className=" min-h-[calc(100vh-128px)] flex flex-col justify-center items-center text-white">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl  text-center">
+        <div className="min-h-[calc(100vh-128px)] flex flex-col justify-center items-center text-white">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl text-center">
             Ops! you have no course purchased yet
           </h1>
           <Link
@@ -53,7 +66,11 @@ const Courses = () => {
           </Link>
         </div>
       )}
+      {isFetchingNextPage && (
+        <div className="text-2xl text-white text-center">Loading more...</div>
+      )}
     </>
   );
 };
+
 export default Courses;

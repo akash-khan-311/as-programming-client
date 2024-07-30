@@ -11,7 +11,6 @@ import { FaCamera } from "react-icons/fa6";
 const Profile = () => {
   const { user, updateUserProfileImage } = useAuth();
   const [role, setRole] = useState(null);
-
   const [loading, setLoading] = useState(false);
 
   const [profileImage, setProfileImage] = useState(
