@@ -48,7 +48,6 @@ section {
 .btn:hover {
   background-position: right center;
   /* change the direction of the change here */
-  color: #ffffff23;
   text-decoration: none;
 }
 
