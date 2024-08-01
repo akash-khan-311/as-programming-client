@@ -74,6 +74,12 @@ export const admissionsCourses = async (email, page = 1, limit = 10) => {
   return data;
 };
 
+// // Get All courses from database
+// export const getAllAdmissionsCourses = async (email) => {
+//   const data = await fetchSecure(`/admissions/${email}`);
+//   return data;
+// };
+
 // get assignment from db for students
 export const getAssignmentsForStudent = async (email) => {
   const data = await fetchSecure(`/assignments/student/${email}`, "GET");

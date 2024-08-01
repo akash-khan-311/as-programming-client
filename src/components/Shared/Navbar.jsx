@@ -90,24 +90,40 @@ const Navbar = () => {
                   <div
                     className={`${
                       open ? "visible opacity-1" : "invisible opacity-0"
-                    } space-y-10 absolute right-0 top-16 z-50 backdrop-blur-md bg-white rounded-md px-2 w-52 `}
+                    } space-y-10 absolute right-0 top-16 z-50 backdrop-blur-md bg-white/20 rounded-md px-2 w-52 shadow-xl`}
                   >
                     <ul>
                       <Link
                         href="/dashboard"
                         className="flex items-center transition-colors "
                       >
-                        <li className="flex items-center w-full text-gray-500 hover:bg-gray-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2">
+                        <li className="flex items-center w-full text-gray-100 hover:backdrop-blur-sm hover:bg-white/30 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2">
                           <MdDashboard className="text-lg" />
                           <span className="text-lg ml-2">Dashboard</span>
                         </li>
                       </Link>
                       {role === "student" && (
                         <Link
+                          href="/bookmarks"
+                          className=" flex items-center justify-between transition-colors"
+                        >
+                          <li className=" text-gray-100 hover:backdrop-blur-sm hover:bg-white/30  hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center justify-between w-full">
+                            <div className="flex items-center">
+                              <FaCartShopping className="text-lg" />
+                              <span className="text-lg ml-2">Bookmarks</span>
+                            </div>
+                            <span className="text-black bg-red-200 text-sm p-1 rounded-full w-6 h-6 flex items-center justify-center">
+                              {cartItemCount}
+                            </span>
+                          </li>
+                        </Link>
+                      )}
+                      {role === "student" && (
+                        <Link
                           href="/cart"
                           className=" flex items-center justify-between transition-colors"
                         >
-                          <li className=" text-gray-500 hover:bg-gray-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center justify-between w-full">
+                          <li className=" text-gray-100 hover:backdrop-blur-sm hover:bg-white/30  hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center justify-between w-full">
                             <div className="flex items-center">
                               <FaCartShopping className="text-lg" />
                               <span className="text-lg ml-2">Cart</span>
@@ -122,14 +138,14 @@ const Navbar = () => {
                         href="/dashboard/profile"
                         className=" flex items-center transition-colors"
                       >
-                        <li className=" text-gray-500 hover:bg-gray-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center w-full">
+                        <li className=" text-gray-100 hover:backdrop-blur-sm hover:bg-white/30  hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center w-full">
                           <CgProfile className="text-lg" />
                           <span className="text-lg ml-2">Profile</span>
                         </li>
                       </Link>
                       <button
                         onClick={logOut}
-                        className="text-gray-500 hover:bg-red-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center  w-full mb-3"
+                        className="text-gray-100 hover:bg-red-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center  w-full mb-3"
                       >
                         <RiLogoutCircleLine className="text-lg" />
                         <span className="text-lg ml-2 ">Logout</span>

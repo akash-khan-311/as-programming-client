@@ -12,6 +12,7 @@ import {
   getTeacherCourseCount,
   getTeacherEarnings,
 } from "@/api/api";
+import { admissionsCourses } from "@/api/courses";
 // import { getUserDetail } from "@/api/auth";
 
 // For Teacher
@@ -114,6 +115,17 @@ const useGetAverageAssignmentMark = () => {
   return [averageMark, isLoading];
 };
 
+const useAdmissionsCourses = (email) => {
+  const { user, loading } = useAuth();
+  const { data: addmisionscourses, isLoading } = useQuery({
+    queryKey: ["admissionsCourses"],
+    queryFn: async () => await admissionsCourses(user?.email),
+    enabled: !loading && !!user?.email,
+  });
+  console.log(addmisionscourses);
+  return [addmisionscourses, isLoading];
+};
+
 // // Get usr Details using react query
 // const useGetUserDetails = () => {
 //   const { user, loading } = useAuth();
@@ -136,4 +148,5 @@ export {
   useGetSubmittedAssignmentCount,
   useGetAverageAssignmentMark,
   // useGetUserDetails,
+  useAdmissionsCourses,
 };

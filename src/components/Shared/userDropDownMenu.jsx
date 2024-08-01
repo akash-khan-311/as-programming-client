@@ -55,10 +55,27 @@ const UserDropDownMenu = () => {
                 <span className="text-sm ml-2">Dashboard</span>
               </Link>
             </li>
+
             {role === "student" && (
               <li className=" hover:backdrop-blur-md hover:bg-white/10 transition-all  pt-[9px] pb-2 px-3 mt-2">
                 <Link
                   href="/dashboard/bookmarks"
+                  className="flex items-center justify-between transition-colors "
+                >
+                  <div className="flex items-center">
+                    <FaCartShopping className="text-lg" />
+                    <span className="text-lg ml-2">Bookmarks</span>
+                  </div>
+                  <span className="text-black bg-red-200 text-sm p-1 rounded-full w-6 h-6 flex items-center justify-center">
+                    {cartItemCount}
+                  </span>
+                </Link>
+              </li>
+            )}
+            {role === "student" && (
+              <li className=" hover:backdrop-blur-md hover:bg-white/10 transition-all  pt-[9px] pb-2 px-3 mt-2">
+                <Link
+                  href="/cart"
                   className="flex items-center justify-between transition-colors "
                 >
                   <div className="flex items-center">

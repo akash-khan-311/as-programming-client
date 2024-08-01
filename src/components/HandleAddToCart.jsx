@@ -1,6 +1,7 @@
 "use client";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
+  admissionsCourses,
   getUserCartItems,
   removeCourseFromCart,
   saveCourseForUser,
@@ -10,12 +11,12 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import useRole from "@/hooks/useRole";
 import Swal from "sweetalert2";
+import { useAdmissionsCourses } from "@/hooks";
 
 const HandleAddToCart = ({ id }) => {
   const queryClient = useQueryClient();
   const { user } = useAuth();
   const [role] = useRole();
-  console.log(role);
 
   // Fetch user's cart items
   const { data: cartItems } = useQuery({
@@ -23,7 +24,21 @@ const HandleAddToCart = ({ id }) => {
     queryFn: async () => await getUserCartItems(user.email),
     enabled: !!user?.email,
   });
-  //   console.log(cartItems);
+
+  // fetch admission courses
+  const { data: admissionCourses, isloading: admissionCoursesLoading } =
+    useQuery({
+      queryKey: ["admissionsCourses"],
+      queryFn: async () => await admissionsCourses(user?.email),
+      enabled: role === "student",
+    });
+
+  // Check if course is an admission course
+  const allAdmisionCourses = admissionCourses?.courses;
+  const isAdmission = allAdmisionCourses?.some(
+    (course) => course?.courseInfo[0]?.courseId === id
+  );
+
   // Determine if course is in cart
   const inCart = cartItems?.some((cartItem) => cartItem._id === id);
 
@@ -85,8 +100,9 @@ const HandleAddToCart = ({ id }) => {
 
   return (
     <button
+      disabled={isAdmission}
       onClick={handleAddToCart}
-      className="select-none mt-4 text-sm md:text-lg lg:text-xl w-full capitalize rounded-lg bg-pink-500 py-2 lg:py-3 px-6 text-center align-middle font-sans font-bold  text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+      className="select-none mt-4 disabled:bg-gray-500 disabled:cursor-not-allowed text-sm md:text-lg lg:text-xl w-full capitalize rounded-lg bg-pink-500 py-2 lg:py-3 px-6 text-center align-middle font-sans font-bold  text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
       type="button"
       data-ripple-light="true"
     >

@@ -3,7 +3,8 @@ import Image from "next/image";
 import { MdMarkEmailRead } from "react-icons/md";
 import { GiTeacher } from "react-icons/gi";
 import HandleAddToCart from "../HandleAddToCart";
-const CourseDetails = ({ course }) => {
+
+const CourseDetails = async ({ course }) => {
   const { title, category, img, description, price, duration, _id, teacher } =
     course;
 
@@ -30,7 +31,7 @@ const CourseDetails = ({ course }) => {
                   type="button"
                   data-ripple-light="true"
                 >
-                  Enroll Course
+                  Add To Bookmark
                 </button>
                 <HandleAddToCart id={_id} />
               </div>
