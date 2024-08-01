@@ -5,8 +5,7 @@ import { GiTeacher } from "react-icons/gi";
 import HandleAddToCart from "../HandleAddToCart";
 
 const CourseDetails = async ({ course }) => {
-  const { title, category, img, description, price, duration, _id, teacher } =
-    course;
+  const { title, img, description, price, _id, teacher } = course;
 
   return (
     <section className="">
