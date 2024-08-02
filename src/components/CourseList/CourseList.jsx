@@ -53,7 +53,7 @@ const CourseList = () => {
           <SkeletonCard />
         ) : hasNextPage ? (
           <span className="text-2xl md:text-3xl lg:text-4xl text-white font-bold">
-            Load more
+            More Course Loading.....
           </span>
         ) : (
           <span className="text-2xl md:text-3xl lg:text-4xl text-white font-bold">
