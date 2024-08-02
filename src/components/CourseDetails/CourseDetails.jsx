@@ -3,6 +3,7 @@ import Image from "next/image";
 import { MdMarkEmailRead } from "react-icons/md";
 import { GiTeacher } from "react-icons/gi";
 import HandleAddToCart from "../HandleAddToCart";
+import HandleAddToBookmark from "../handleAddToBookmark";
 
 const CourseDetails = async ({ course }) => {
   const { title, img, description, price, _id, teacher } = course;
@@ -25,13 +26,7 @@ const CourseDetails = async ({ course }) => {
                 </h5>
               </div>
               <div className="p-6 pt-0 w-full">
-                <button
-                  className="select-none text-sm md:text-lg lg:text-xl w-full capitalize rounded-lg bg-pink-500 py-2 lg:py-3  px-6 text-center align-middle font-sans font-bold  text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                  type="button"
-                  data-ripple-light="true"
-                >
-                  Add To Bookmark
-                </button>
+                <HandleAddToBookmark id={_id} />
                 <HandleAddToCart id={_id} />
               </div>
             </div>
