@@ -74,6 +74,23 @@ export const admissionsCourses = async (email, page = 1, limit = 10) => {
   return data;
 };
 
+// Get Bookmarks Course for student
+export const getBookmarksForStudent = async (email) => {
+  const data = await fetchSecure(`/bookmarks/${email}`, "GET");
+  return data;
+};
+// Remove course from bookmarks
+export const removeCourseFromBookmarks = async (courseId, email) => {
+  const data = await fetchSecure(`/bookmarks`, "DELETE", { courseId, email });
+  return data;
+};
+
+// save bookmark course in db
+export const saveCourseToBookmarks = async (courseId, userEmail) => {
+  const data = await fetchSecure(`/bookmarks`, "POST", { courseId, userEmail });
+  return data;
+};
+
 // // Get All courses from database
 // export const getAllAdmissionsCourses = async (email) => {
 //   const data = await fetchSecure(`/admissions/${email}`);
