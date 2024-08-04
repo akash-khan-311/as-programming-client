@@ -5,6 +5,8 @@ import { useInView } from "react-intersection-observer";
 import { getAllCourses } from "@/api/courses";
 import CourseCard from "../Shared/CourseCard";
 import SkeletonCard from "../Shared/SkeletonCard/SkeletonCard";
+import CourseLoader from "./CourseLoader";
+import Loader from "../Shared/Loader";
 
 const productsPerPage = 3;
 
@@ -36,7 +38,7 @@ const CourseList = () => {
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
-  if (status === "loading") return <SkeletonCard />;
+  if (status === "loading") return <CourseLoader />;
   if (status === "error") return <p>Error fetching courses: {error.message}</p>;
 
   return (
@@ -50,7 +52,7 @@ const CourseList = () => {
       </div>
       <div ref={ref} className="text-center mt-10">
         {isFetchingNextPage ? (
-          <SkeletonCard />
+          <CourseLoader />
         ) : hasNextPage ? (
           <span className="text-2xl md:text-3xl lg:text-4xl text-white font-bold">
             More Course Loading.....
