@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const CourseDataRow = ({ course }) => {
   const { title, category, img, level, price, duration } = course;
-
+  console.log(level);
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 text-sm">

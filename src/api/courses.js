@@ -34,7 +34,11 @@ export const saveCourse = async (course) => {
   const data = await fetchSecure("/course", "POST", course);
   return data;
 };
-
+// Update Course
+export const updateCourse = async ({ id, course }) => {
+  const data = await fetchSecure(`/course/${id}`, "PUT", course);
+  return data;
+};
 // save course for user || CART
 export const saveCourseForUser = async (courseId, userEmail) => {
   const data = await fetchSecure(`/cart`, "POST", { courseId, userEmail });

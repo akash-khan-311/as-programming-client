@@ -29,7 +29,8 @@ const AddCourseForm = () => {
     const price = formData.price;
     const duration = formData.duration;
     const image = formData.image[0];
-    console.log(image);
+    const level = formData.level;
+    console.log(level);
     if (!image) {
       toast.error("Please upload an image");
       return;
@@ -142,13 +143,13 @@ const AddCourseForm = () => {
                 <option className="text-black" value="">
                   Select a level
                 </option>
-                <option className="text-black" value="beginner">
+                <option className="text-black" value="Beginner">
                   Beginner
                 </option>
-                <option className="text-black" value="intermediate">
+                <option className="text-black" value="Intermediate">
                   Intermediate
                 </option>
-                <option className="text-black" value="advanced">
+                <option className="text-black" value="Advanced">
                   Advanced
                 </option>
               </select>
