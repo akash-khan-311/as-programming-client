@@ -3,11 +3,14 @@
 import AdminStatistics from "@/components/Dashboard/Statistics/AdminStatistics";
 import StudentStatistics from "@/components/Dashboard/Statistics/StudentStatistics";
 import TeacherStatistics from "@/components/Dashboard/Statistics/TeacherStatistics";
+import Loader from "@/components/Shared/Loader";
 import useAuth from "@/hooks/useAuth";
 import useRole from "@/hooks/useRole";
 
 const DasbhboardPage = () => {
-  const [role] = useRole();
+  const [role, isLoading] = useRole();
+
+  if (isLoading) return <Loader />;
   console.log(role);
 
   if (role === "admin") return <AdminStatistics />;

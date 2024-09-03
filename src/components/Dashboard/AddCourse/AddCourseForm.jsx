@@ -41,7 +41,7 @@ const AddCourseForm = () => {
       // Upload image
       const courseImageData = await imageUpload(image);
       const courseImageURL = courseImageData?.data?.display_url;
-      console.log(courseImageURL);
+
       // Construct course object
       const course = {
         title,
@@ -49,6 +49,7 @@ const AddCourseForm = () => {
         description,
         price,
         duration,
+        level,
         img: courseImageURL,
         status: "pending",
         teacher: {

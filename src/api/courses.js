@@ -25,7 +25,7 @@ export const getSingleCourse = async (id) => {
 // Get beginners courses
 export const getBeginnerCourses = async () => {
   const data = await fetchSecure("/beginners", "GET");
-  console.log(data.data);
+
   return data;
 };
 
@@ -75,6 +75,32 @@ export const admissionsCourses = async (email, page = 1, limit = 10) => {
   const data = await fetchSecure(
     `/admissions/${email}?page=${page}&limit=${limit}`
   );
+  return data;
+};
+// Get Payment Info for Admin
+export const getPaymentInfo = async () => {
+  const data = await fetchSecure(`/admin/payment`, "GET");
+  return data;
+};
+// Remove Assignment from db for admin
+export const removeAssignment = async (email) => {
+  const data = await fetchSecure(`/remove/assignment/${email}`, "DELETE");
+  return data;
+};
+// delete admision data from db
+export const deleteAdmission = async (id) => {
+  const data = await fetchSecure(`/delete/admission/${id}`, "DELETE");
+  return data;
+};
+// Get all courses admin
+export const getAllCourseforAdmin = async () => {
+  const data = await fetchSecure(`/courses/admin`, "GET");
+  return data;
+};
+
+// Update course status for live course
+export const updateCourseStatus = async (id) => {
+  const data = await fetchSecure(`/course/status/${id}`, "PUT");
   return data;
 };
 

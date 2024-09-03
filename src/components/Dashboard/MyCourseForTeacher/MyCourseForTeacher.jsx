@@ -75,6 +75,12 @@ const MyCourseForTeacher = () => {
                       >
                         Duration
                       </th>
+                      <th
+                        scope="col"
+                        className="px-8  font-bold py-3 text-left text-white uppercase tracking-wider "
+                      >
+                        Status
+                      </th>
                     </tr>
                   </thead>
                   <tbody className=" backdrop-blur-sm bg-white/10 divide-y divide-gray-200">

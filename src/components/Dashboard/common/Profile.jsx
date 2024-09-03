@@ -88,7 +88,7 @@ const Profile = () => {
   }, [user.email]);
 
   return (
-    <div className="mx-auto max-w-242.5">
+    <div className="mx-auto max-w-242.5 mt-10 lg:mt-0">
       <div className="overflow-hidden rounded-sm border border-stroke backdrop-blur-lg bg-white/10 shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="relative -z-20 h-[140px] md:h-72">
           <Image
@@ -121,7 +121,7 @@ const Profile = () => {
         </div>
         <div className="px-4 text-center lg:pb-8">
           <div className=" mx-auto   w-full overflow-hidden ">
-            <div className="relative block ">
+            <div className=" relative inline-block">
               <Image
                 width={100}
                 height={100}
@@ -131,9 +131,9 @@ const Profile = () => {
               />
               <label
                 htmlFor="profile"
-                className="absolute bottom-0 right-1 flex h-8.5 w-8.5 cursor-pointer items-center justify-center rounded-full bg-primary text-white hover:bg-opacity-90 sm:bottom-2 sm:right-2"
+                className="absolute flex h-8.5 w-8.5 cursor-pointer items-center justify-center rounded-full bg-primary text-white hover:bg-opacity-90 sm:bottom-2 sm:right-2"
               >
-                <FaCamera className="absolute bottom-0 right-2" />
+                <FaCamera className="h-4 w-4" />
                 <input
                   ref={imageRef}
                   onChange={handleFileChange}

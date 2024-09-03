@@ -43,7 +43,7 @@ const Courses = () => {
 
   return (
     <>
-      {data?.pages?.flat().length ? (
+      {data?.length ? (
         <div className="flex flex-col justify-center items-center gap-10 my-10">
           {data.pages.map((page, pageIndex) =>
             page.courses.map((course, courseIndex) =>
