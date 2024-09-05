@@ -55,7 +55,7 @@ export const updateUserCoverImg = async (email, coverImg) => {
     coverImg,
     status: "verified",
   };
-  const data = await fetchSecure(`/users/update/${email}`, "PUT", currentUser);
+  const data = await fetchSecure(`/user/cover/${email}`, "PUT", currentUser);
   return data;
 };
 

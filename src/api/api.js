@@ -65,6 +65,10 @@ export const getTotalCourses = async () => {
   const data = await fetchSecure(`/admin/courses/count`);
   return data;
 };
+export const getTotalAssignments = async () => {
+  const data = await fetchSecure(`/admin/assignments/count`);
+  return data;
+};
 export const getTotalEarnings = async () => {
   const data = await fetchSecure(`/admin/earnings`);
   return data;
