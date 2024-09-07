@@ -71,10 +71,8 @@ export const removeCourse = async (id) => {
 };
 
 // Get Admissions course by email
-export const admissionsCourses = async (email, page = 1, limit = 10) => {
-  const data = await fetchSecure(
-    `/admissions/${email}?page=${page}&limit=${limit}`
-  );
+export const admissionsCourses = async (email) => {
+  const data = await fetchSecure(`/admissions/${email}`);
   return data;
 };
 // Get Payment Info for Admin

@@ -1,56 +1,36 @@
 "use client";
 
-import { admissionsCourses } from "@/api/courses";
 import useAuth from "@/hooks/useAuth";
-import { useInfiniteQuery } from "react-query";
+
 import CourseCard from "./CourseCard";
 import Link from "next/link";
-import { useEffect } from "react";
+
 import Loader from "@/components/Shared/Loader";
+import { useQuery } from "react-query";
+import { admissionsCourses } from "@/api/courses";
 
 const Courses = () => {
   const { user } = useAuth();
-
-  // Fetch admissions courses with infinite scroll
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    useInfiniteQuery(
-      ["courses", user?.email],
-      async ({ pageParam = 0 }) =>
-        await admissionsCourses(user?.email, pageParam, 2),
-      {
-        enabled: !!user?.email, // Only fetch if user email is available
-        getNextPageParam: (lastPage, pages) =>
-          lastPage.hasNextPage ? pages.length + 1 : false,
-      }
-    );
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop + 1 >=
-        document.documentElement.scrollHeight
-      ) {
-        if (hasNextPage) fetchNextPage();
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [hasNextPage, fetchNextPage]);
-
+  const { data: coursesInfo, isLoading } = useQuery({
+    queryKey: ["courses"],
+    queryFn: async () => await admissionsCourses(user?.email),
+    enabled: !!user?.email,
+  });
   if (isLoading) {
     return <Loader />;
   }
 
+  console.log(coursesInfo);
   return (
     <>
-      {data?.length ? (
+      {coursesInfo?.length ? (
         <div className="flex flex-col justify-center items-center gap-10 my-10">
-          {data.pages.map((page, pageIndex) =>
-            page.courses.map((course, courseIndex) =>
-              course.courseInfo.map((info) => (
-                <CourseCard key={info.courseId} id={info.courseId} />
+          {coursesInfo.map(
+            (course) =>
+              course.courseInfo.map((course) => (
+                <CourseCard key={course.courseId} id={course.courseId} />
               ))
-            )
+            // <CourseCard key={course._id} data={course} />
           )}
         </div>
       ) : (
@@ -65,9 +45,6 @@ const Courses = () => {
             Purchase Course
           </Link>
         </div>
-      )}
-      {isFetchingNextPage && (
-        <div className="text-2xl text-white text-center">Loading more...</div>
       )}
     </>
   );
