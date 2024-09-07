@@ -18,15 +18,15 @@ const About = () => {
           skill levels. Join a supportive community of learners and educators,
           collaborate on projects, and receive guidance from peers and mentors.
         </p>
-        <div className="flex flex-col-reverse md:flex-row justify-center items-start mt-20">
+        <div className="flex w-full flex-col-reverse md:flex-row justify-center items-center mt-20 mx-auto">
           <Accordion />
           <div className="w-full ">
             <Image
               src={"/images/about.png"}
-              width={500}
-              height={500}
+              width={800}
+              height={800}
               alt={"about"}
-              className="mx-auto sm:h-96  "
+              className="mx-auto"
             />
           </div>
         </div>

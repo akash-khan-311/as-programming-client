@@ -10,6 +10,16 @@ const AdminMenu = () => {
         label="Manage User"
         path="/dashboard/manage-user"
       />
+      <MenuItem
+        icon={FaUserCog}
+        label="Manage Course"
+        path="/dashboard/manage-course"
+      />
+      <MenuItem
+        icon={FaUserCog}
+        label="Payment Info"
+        path="/dashboard/payment"
+      />
     </>
   );
 };

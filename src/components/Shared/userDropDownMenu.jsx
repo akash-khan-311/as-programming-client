@@ -42,7 +42,7 @@ const UserDropDownMenu = () => {
         <div
           className={`${
             open ? "visible opacity-1" : "invisible opacity-0"
-          } space-y-10 absolute right-0 top-10 z-50 backdrop-blur-md bg-white/20 rounded-md px-2 w-52 `}
+          } space-y-10 absolute right-0 top-10 z-50 backdrop-blur-2xl bg-black/70 rounded-md px-2 w-52 `}
         >
           <ul>
             <li className=" hover:backdrop-blur-md hover:bg-white/10 transition-all  pt-[9px] pb-2 px-3 mt-2">

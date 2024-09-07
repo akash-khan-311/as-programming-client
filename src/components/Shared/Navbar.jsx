@@ -67,9 +67,9 @@ const Navbar = () => {
   return (
     <nav
       className={`${
-        header && " w-full backdrop-blur-2xl border-b bg-black/50 "
+        header ? " w-full backdrop-blur-2xl bg-black/70 border-b " : ""
       } ${
-        isDashboard ? "hidden " : ""
+        isDashboard && "hidden "
       } transition-all durration-500 z-[999] block w-full py-2 mx-auto text-white fixed top-0 `}
     >
       <Container>
@@ -101,7 +101,7 @@ const Navbar = () => {
                   <div
                     className={`${
                       open ? "visible opacity-1 " : "invisible opacity-0 "
-                    } space-y-10 absolute right-0 top-16 z-50 backdrop-blur-md bg-white/20 rounded-md px-2 w-52 shadow-xl`}
+                    } space-y-10 backdrop-blur-2xl bg-white/20 absolute right-0 top-16 z-50   rounded-md px-2 w-52 shadow-xl`}
                   >
                     <ul>
                       <Link

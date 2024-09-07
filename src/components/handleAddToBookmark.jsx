@@ -10,6 +10,7 @@ import useAuth from "@/hooks/useAuth";
 import useRole from "@/hooks/useRole";
 import toast from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import Swal from "sweetalert2";
 
 const HandleAddToBookmark = ({ id }) => {
   const queryClient = useQueryClient();

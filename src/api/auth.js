@@ -14,7 +14,7 @@ export const saveUser = async (user) => {
 // Get Token from server
 export const getToken = async (email) => {
   const data = await fetchSecure(`/jwt`, "POST", { email });
-  console.log("token paichi==============>", data);
+  console.log("token paichi server theke==============>", data);
   return data;
 };
 
@@ -32,6 +32,7 @@ export const getAllUsers = async () => {
 // Get user role
 export const getRole = async (email) => {
   const data = await fetchSecure(`/user/${email}`, "GET");
+
   return data.role;
 };
 
@@ -54,7 +55,7 @@ export const updateUserCoverImg = async (email, coverImg) => {
     coverImg,
     status: "verified",
   };
-  const data = await fetchSecure(`/users/update/${email}`, "PUT", currentUser);
+  const data = await fetchSecure(`/user/cover/${email}`, "PUT", currentUser);
   return data;
 };
 

@@ -11,6 +11,9 @@ import {
   getSubmittedAssignmetCount,
   getTeacherCourseCount,
   getTeacherEarnings,
+  getTotalCourses,
+  getTotalTeachers,
+  getTotalUsers,
 } from "@/api/api";
 import { admissionsCourses } from "@/api/courses";
 // import { getUserDetail } from "@/api/auth";
@@ -137,6 +140,36 @@ const useAdmissionsCourses = (email) => {
 //   console.log(userDetails);
 //   return [userDetails, isLoading];
 // };
+
+// For Admin
+const useGetTotalUsers = () => {
+  const { user, loading } = useAuth();
+  const { data: users, isLoading } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => await getTotalUsers(),
+    enabled: !loading && !!user?.email,
+  });
+
+  return [users, isLoading]; // Ensure this returns an array
+};
+const useGetTotalCourses = () => {
+  const { user, loading } = useAuth();
+  const { data: courses, isLoading } = useQuery({
+    queryKey: ["courses"],
+    queryFn: async () => await getTotalCourses(),
+    enabled: !loading && !!user?.email,
+  });
+
+  return [courses, isLoading]; // Ensure this returns an array
+};
+const useGetTotalTeachers = () => {
+  const { data: teachers, isLoading } = useQuery({
+    queryKey: ["teachers"],
+    queryFn: async () => await getTotalTeachers(),
+  });
+
+  return [teachers, isLoading];
+};
 export {
   useGetAssignmentCountForTeacher,
   useGetCourseCount,
@@ -147,6 +180,8 @@ export {
   useGetAssignmentMarks,
   useGetSubmittedAssignmentCount,
   useGetAverageAssignmentMark,
-  // useGetUserDetails,
+  useGetTotalUsers,
   useAdmissionsCourses,
+  useGetTotalCourses,
+  useGetTotalTeachers,
 };
