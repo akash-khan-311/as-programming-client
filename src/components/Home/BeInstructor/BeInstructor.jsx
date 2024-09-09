@@ -20,13 +20,13 @@ const BeInstructor = () => {
           {/* content */}
           <div className="md:w-1/2 w-full space-y-3 text-center md:text-left">
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
-              Becom an Instructor
+              Become a Teacher
             </h1>
             <p>
               Instructors From Around The World Teach Millions Of Learners On
               Online . We Provide Tools And Skills To Teach You Love
             </p>
-            <Link className="btn" href="/teach">
+            <Link className="btn py-2 px-10" href="/teach">
               Start Teaching Today
             </Link>
           </div>

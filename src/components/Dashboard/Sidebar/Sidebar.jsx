@@ -19,6 +19,7 @@ import TeacherMenu from "../Menu/TeacherMenu";
 import { getRole } from "@/api/auth";
 import AdminMenu from "../Menu/AdminMenu";
 import useRole from "@/hooks/useRole";
+import HandleBecomeAteacher from "@/components/Shared/HandleBecomeAtecher/HandleBecomeAteacher";
 
 const Sidebar = () => {
   const { user, logOut } = useAuth();
@@ -35,9 +36,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Small Screen Navbar */}
-      <div className="  text-gray-100 flex justify-between md:hidden">
-        <div>{/* <Logo /> */}</div>
-
+      <div className="  text-gray-100 flex justify-between lg:hidden">
         <button
           onClick={handleToggle}
           className="absolute right-0 top-0 p-4 focus:outline-none "
@@ -47,9 +46,9 @@ const Sidebar = () => {
       </div>
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden backdrop-blur-md bg-white/10 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-10 lg:fixed flex flex-col justify-between overflow-x-hidden backdrop-blur-md bg-white/10 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
-        }  md:translate-x-0  transition duration-200 ease-in-out`}
+        }  lg:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
           <div className="shadow-xl shadow-white/10 rounded-xl py-3">
@@ -65,9 +64,15 @@ const Sidebar = () => {
               {role === "student" && (
                 <>
                   <StudentMenu />
-                  <button className="flex items-center px-4 py-2 my-4  transition-colors duration-300 transform  hover:backdrop-blur-sm hover:bg-white/10 text-white w-full  hover:text-gray-100">
+                  {/* <button className="flex items-center px-4 py-2 my-4  transition-colors duration-300 transform  hover:backdrop-blur-sm hover:bg-white/10 text-white w-full  hover:text-gray-100">
                     Become a Teacher
-                  </button>
+                  </button> */}
+                  <HandleBecomeAteacher
+                    style={
+                      "flex items-center px-4 py-2 my-4  transition-colors duration-300 transform  hover:backdrop-blur-sm hover:bg-white/10 text-white w-full  hover:text-gray-100"
+                    }
+                    label={"Become a Teacher"}
+                  />
                 </>
               )}
               {role === "teacher" && <TeacherMenu />}

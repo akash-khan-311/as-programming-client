@@ -11,129 +11,151 @@ import { FaCamera } from "react-icons/fa6";
 const Profile = () => {
   const { user, updateUserProfileImage } = useAuth();
   const [role, setRole] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [coverPhotoLoading, setCoverPhotoLoading] = useState(false);
+  const [profileImgLoading, setProfileImgLoading] = useState(false);
 
   const [profileImage, setProfileImage] = useState(
     user.photoURL ||
       "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png"
   );
+  const [coverPhoto, setCoverPhoto] = useState(
+    "https://img.freepik.com/free-photo/light-gray-abstract-background_53876-101909.jpg"
+  );
   const imageRef = useRef(null);
+  const coverImgRef = useRef(null);
 
-  // const handleCoverImgChange = async () => {
-  //   try {
-  //     const file = coverImgRef.current.files[0];
-  //     console.log(file);
-  //     if (file) {
-  //       const data = await imageUpload(file);
-  //       if (!data) {
-  //         toast.error("Image not found");
-  //       }
-  //       const imgUrl = data.data.display_url;
-  //       console.log(imgUrl);
-  //       const result = await updateUserCoverImg(user?.email, imgUrl);
-  //       console.log(result);
-  //     } else {
-  //       toast.error("Please select an image");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   const handleFileChange = async () => {
     try {
-      setLoading(true);
+      setProfileImgLoading(true);
       const file = imageRef.current.files[0];
 
       if (file) {
-        const data = await imageUpload(file);
+        const data = await imageUpload(file); // Upload image
         const imgUrl = data.data.display_url;
-        console.log(imgUrl);
+        console.log("Uploaded image URL:", imgUrl);
+
         if (!imgUrl) {
-          toast.error("Image not found");
+          toast.error("Image upload failed");
           return;
         }
+
+        // Update user profile image in authentication state (Firebase or your custom auth system)
         await updateUserProfileImage(imgUrl);
 
+        // Update the frontend state with the new image
         setProfileImage(imgUrl);
+
+        toast.success("Profile image updated successfully");
       } else {
         toast.error("Please select an image");
       }
     } catch (error) {
-      console.log(error);
-      setLoading(false);
+      console.log("Error uploading image:", error);
+      toast.error("Failed to update profile image");
     } finally {
-      setLoading(false);
+      setProfileImgLoading(false);
+    }
+  };
+
+  const handleCoverImgChange = async () => {
+    try {
+      setCoverPhotoLoading(true);
+      const file = coverImgRef.current.files[0];
+      if (file) {
+        const data = await imageUpload(file);
+        const imgUrl = data?.data?.display_url;
+        console.log("Uploaded cover image URL:", imgUrl);
+        if (!imgUrl) {
+          toast.error("Image upload failed");
+          return;
+        }
+        const result = await updateUserCoverImg(user?.email, imgUrl);
+        console.log(result);
+        setCoverPhoto(imgUrl);
+        if (result.acknowledged && modifiedCount > 0) {
+          toast.success("Cover image updated successfully");
+        } else {
+          toast.error("Failed to update cover image");
+        }
+      } else {
+        toast.error("Please select an image");
+      }
+    } catch (error) {
+      console.error("Error uploading cover image:", error);
+    } finally {
+      setCoverPhotoLoading(false);
     }
   };
 
   useEffect(() => {
-    const getRoleFromDb = async () => {
+    const fetchUserData = async () => {
       const role = await getRole(user?.email);
+      const coverImg = await getUserCoverImg(user?.email); // Fetch cover image from DB
       setRole(role);
+      if (coverImg) {
+        setCoverPhoto(coverImg); // Update the cover photo state
+      }
     };
-    // const getCoverImg = async () => {
-    //   const coverImg = await getUserCoverImg(user?.email);
-    //   if (!coverImg) {
-    //     toast.error("Image not found");
-    //     setCoverPhoto(
-    //       "https://img.freepik.com/free-photo/light-gray-abstract-background_53876-101909.jpg"
-    //     );
-    //   }
-
-    //   setCoverPhoto(coverImg);
-    // };
-
-    // getCoverImg();
-    getRoleFromDb();
+    fetchUserData();
   }, [user.email]);
 
   return (
-    <div className="mx-auto max-w-242.5">
-      <div className="overflow-hidden rounded-sm border border-stroke backdrop-blur-lg bg-white/10 shadow-default dark:border-strokedark dark:bg-boxdark">
-        <div className="relative -z-20 h-[140px] md:h-72">
-          <Image
-            src={
-              "https://img.freepik.com/free-photo/light-gray-abstract-background_53876-101909.jpg"
-            }
-            alt="profile cover"
-            className="h-full w-full rounded-tl-sm rounded-tr-sm object-cover object-center"
-            width={970}
-            height={660}
-          />
-          <div className=" absolute bottom-1 right-1 z-10 xsm:bottom-4 xsm:right-4">
+    <div className="mx-auto max-w-242.5 mt-10 lg:mt-0">
+      <div className="overflow-hidden rounded-sm border border-stroke backdrop-blur-lg bg-white/10 shadow-default dark:border-strokedark ">
+        <div className="relative -z-20 h-min-[140px] md:h-96">
+          {coverPhotoLoading ? (
+            <div className="animate-pulse bg-gray-300 h-full w-full rounded-tl-sm rounded-tr-sm"></div> // Skeleton
+          ) : (
+            <Image
+              src={coverPhoto}
+              alt="profile cover"
+              className="h-full w-full rounded-tl-sm rounded-tr-sm object-center "
+              width={800}
+              height={800}
+            />
+          )}
+
+          <div className="border absolute top-1 transition-all duration-300 hover:bg-gray-50 hover:bg-opacity-25 right-1 z-10 xsm:bottom-4 xsm:right-4">
             <label
               htmlFor="cover"
               className="flex cursor-pointer items-center justify-center gap-2 rounded bg-primary px-2 py-1 text-sm font-medium text-white hover:bg-opacity-80 xsm:px-4"
             >
               <input
-                // ref={coverImgRef}
-                // onChange={handleCoverImgChange}
+                ref={coverImgRef}
+                onChange={handleCoverImgChange}
                 type="file"
                 name="cover"
                 id="cover"
                 className="sr-only"
                 accept="image/*"
               />
-              <FaCamera />
-              <span>Edit</span>
+              <div className="flex items-center gap-x-5 ">
+                <FaCamera />
+                <span>Change Cover Photo</span>
+              </div>
             </label>
           </div>
         </div>
-        <div className="px-4 text-center lg:pb-8">
-          <div className=" mx-auto   w-full overflow-hidden ">
-            <div className="relative block ">
-              <Image
-                width={100}
-                height={100}
-                alt="profile"
-                src={profileImage}
-                className="mx-auto object-cover rounded-full h-32 w-32  border-2 border-white "
-              />
+        <div className="px-4  text-center lg:pb-8 ">
+          <div className="mx-auto  bottom-0 w-full overflow-hidden ">
+            <div className="relative inline-block">
+              {profileImgLoading ? (
+                <div className="animate-pulse bg-gray-300 h-32 w-32 rounded-full mx-auto"></div>
+              ) : (
+                <Image
+                  width={500}
+                  height={500}
+                  alt="profile"
+                  src={profileImage}
+                  className="mx-auto  object-cover rounded-full h-32 w-32  border-2 border-white "
+                />
+              )}
+
               <label
                 htmlFor="profile"
-                className="absolute bottom-0 right-1 flex h-8.5 w-8.5 cursor-pointer items-center justify-center rounded-full bg-primary text-white hover:bg-opacity-90 sm:bottom-2 sm:right-2"
+                className="absolute flex h-8.5 w-8.5 cursor-pointer items-center justify-center rounded-full bg-primary text-white hover:bg-opacity-90 sm:bottom-2 sm:right-2"
               >
-                <FaCamera className="absolute bottom-0 right-2" />
+                <FaCamera className="h-4 w-4" />
                 <input
                   ref={imageRef}
                   onChange={handleFileChange}
@@ -145,13 +167,12 @@ const Profile = () => {
                 />
               </label>
             </div>
-          </div>
-          <div className="">
             <h3 className="mb-1.5 text-2xl font-semibold text-white">
               {user?.displayName}
             </h3>
             <p className="font-medium uppercase text-white">{role}</p>
-
+          </div>
+          <div className="">
             <div className="mt-6 flex flex-col-reverse md:flex-row-reverse justify-between items-center">
               <div>
                 <button className="bg-pink-500 py-1 px-3 text-white rounded-md">

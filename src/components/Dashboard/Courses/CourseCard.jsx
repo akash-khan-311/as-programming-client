@@ -20,7 +20,7 @@ const CourseCard = ({ id }) => {
   } = useQuery(["course", id], async () => await getSingleCourse(id), {
     enabled: !!id,
   });
-
+  console.log(singleCourse);
   const {
     register,
     handleSubmit,

@@ -21,8 +21,6 @@ const ManageUserForAdmin = () => {
     queryFn: async () => await getAllUsers(),
   });
 
-  console.log(users);
-
   if (isLoading) {
     return <Loader />;
   }

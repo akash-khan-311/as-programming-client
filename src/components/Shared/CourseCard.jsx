@@ -4,7 +4,7 @@ import { FaBookOpen, FaDollarSign } from "react-icons/fa";
 
 const CourseCard = ({ data }) => {
   const { img, title, duration, description, price, _id } = data;
-
+  console.log(data);
   return (
     <div className="relative flex backdrop-blur-xl min-h-[500px] flex-col rounded-xl bg-white/30 text-white shadow-md">
       <div className="relative mx-4 mt-4  h-56 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
@@ -12,7 +12,8 @@ const CourseCard = ({ data }) => {
           src={img}
           alt="img-blur-shadow"
           className="w-full h-full"
-          layout="fill"
+          width={300}
+          height={300}
         />
       </div>
       <div className="p-6">

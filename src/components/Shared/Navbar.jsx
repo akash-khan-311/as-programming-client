@@ -15,7 +15,7 @@ import { FaBookmark } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { FaCartShopping } from "react-icons/fa6";
 import { useQuery } from "react-query";
-import { getUserCartItems } from "@/api/courses";
+import { getBookmarksForStudent, getUserCartItems } from "@/api/courses";
 import Loader from "./Loader";
 import useRole from "@/hooks/useRole";
 
@@ -35,8 +35,19 @@ const Navbar = () => {
       enabled: !!user?.email, // Only fetch if user email is available
     }
   );
-  // Calculate cart items count
+
+  // Fetch Bookmark Items using react query
+  const { data: bookmarkItems } = useQuery(
+    ["bookmarksItems", user?.email],
+    async () => await getBookmarksForStudent(user?.email),
+    {
+      enabled: !!user?.email, // Only fetch if user email is available
+    }
+  );
+
+  // Calculate cart items count and bookmark items count
   const cartItemCount = cartItems?.length || 0;
+  const bookmarkItemCount = bookmarkItems?.length || 0;
   const scrollHandler = () => {
     if (window.scrollY > 1) {
       setHeader(true);
@@ -56,9 +67,9 @@ const Navbar = () => {
   return (
     <nav
       className={`${
-        header && " w-full backdrop-blur-2xl border-b bg-black/50  `"
+        header ? " w-full backdrop-blur-2xl bg-black/70 border-b " : ""
       } ${
-        isDashboard ? "hidden " : ""
+        isDashboard && "hidden "
       } transition-all durration-500 z-[999] block w-full py-2 mx-auto text-white fixed top-0 `}
     >
       <Container>
@@ -89,17 +100,17 @@ const Navbar = () => {
 
                   <div
                     className={`${
-                      open ? "visible opacity-1" : "invisible opacity-0"
-                    } space-y-10 absolute right-0 top-16 z-50 backdrop-blur-md bg-white/20 rounded-md px-2 w-52 shadow-xl`}
+                      open ? "visible opacity-1 " : "invisible opacity-0 "
+                    } space-y-10 backdrop-blur-2xl bg-white/20 absolute right-0 top-16 z-50   rounded-md px-2 w-52 shadow-xl`}
                   >
                     <ul>
                       <Link
                         href="/dashboard"
                         className="flex items-center transition-colors "
                       >
-                        <li className="flex items-center w-full text-gray-100 hover:backdrop-blur-sm hover:bg-white/30 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2">
-                          <MdDashboard className="text-lg" />
-                          <span className="text-lg ml-2">Dashboard</span>
+                        <li className="flex items-center w-full text-gray-100 hover:backdrop-blur-sm hover:bg-white/30 hover:text-black transition-all rounded-md  pt-[9px] pb-2 px-3 mt-2">
+                          <MdDashboard className="text-sm" />
+                          <span className="text-sm ml-2">Dashboard</span>
                         </li>
                       </Link>
                       {role === "student" && (
@@ -107,13 +118,13 @@ const Navbar = () => {
                           href="/bookmarks"
                           className=" flex items-center justify-between transition-colors"
                         >
-                          <li className=" text-gray-100 hover:backdrop-blur-sm hover:bg-white/30  hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center justify-between w-full">
+                          <li className=" text-gray-100 hover:backdrop-blur-sm hover:bg-white/30  hover:text-black transition-all rounded-md  pt-[9px] pb-2 px-3 mt-2 flex items-center justify-between w-full">
                             <div className="flex items-center">
-                              <FaCartShopping className="text-lg" />
-                              <span className="text-lg ml-2">Bookmarks</span>
+                              <FaCartShopping className="text-sm" />
+                              <span className="text-sm ml-2">Bookmarks</span>
                             </div>
-                            <span className="text-black bg-red-200 text-sm p-1 rounded-full w-6 h-6 flex items-center justify-center">
-                              {cartItemCount}
+                            <span className="text-black backdrop-blur-lg bg-white/60 text-sm p-1 rounded-full w-6 h-6 flex items-center justify-center">
+                              {bookmarkItemCount}
                             </span>
                           </li>
                         </Link>
@@ -123,12 +134,12 @@ const Navbar = () => {
                           href="/cart"
                           className=" flex items-center justify-between transition-colors"
                         >
-                          <li className=" text-gray-100 hover:backdrop-blur-sm hover:bg-white/30  hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center justify-between w-full">
+                          <li className=" text-gray-100 hover:backdrop-blur-sm hover:bg-white/30  hover:text-black transition-all rounded-md  pt-[9px] pb-2 px-3 mt-2 flex items-center justify-between w-full">
                             <div className="flex items-center">
-                              <FaCartShopping className="text-lg" />
-                              <span className="text-lg ml-2">Cart</span>
+                              <FaCartShopping className="text-sm" />
+                              <span className="text-sm ml-2">Cart</span>
                             </div>
-                            <span className="text-black bg-red-200 text-sm p-1 rounded-full w-6 h-6 flex items-center justify-center">
+                            <span className="text-black backdrop-blur-lg bg-white/60 text-sm p-1 rounded-full w-6 h-6 flex items-center justify-center">
                               {cartItemCount}
                             </span>
                           </li>
@@ -138,17 +149,17 @@ const Navbar = () => {
                         href="/dashboard/profile"
                         className=" flex items-center transition-colors"
                       >
-                        <li className=" text-gray-100 hover:backdrop-blur-sm hover:bg-white/30  hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center w-full">
-                          <CgProfile className="text-lg" />
-                          <span className="text-lg ml-2">Profile</span>
+                        <li className=" text-gray-100 hover:backdrop-blur-sm hover:bg-white/30  hover:text-black transition-all rounded-md  pt-[9px] pb-2 px-3 mt-2 flex items-center w-full">
+                          <CgProfile className="text-sm" />
+                          <span className="text-sm ml-2">Profile</span>
                         </li>
                       </Link>
                       <button
                         onClick={logOut}
-                        className="text-gray-100 hover:bg-red-200 hover:text-black transition-all  pt-[9px] pb-2 px-3 mt-2 flex items-center  w-full mb-3"
+                        className="text-gray-100 hover:bg-red-400 hover:text-black transition-all rounded-md  pt-[9px] pb-2 px-3 mt-2 flex items-center  w-full mb-3"
                       >
-                        <RiLogoutCircleLine className="text-lg" />
-                        <span className="text-lg ml-2 ">Logout</span>
+                        <RiLogoutCircleLine className="text-sm" />
+                        <span className="text-sm ml-2 ">Logout</span>
                       </button>
                     </ul>
                   </div>
