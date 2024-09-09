@@ -32,7 +32,7 @@ const ManageUserForAdmin = () => {
   if (isError) {
     return (
       <div className="flex justify-center items-center flex-col text-2xl md:text-3xl lg:text-4xl text-center text-red-500">
-        <p>Failed to load users.</p>
+        <p>Failed to Load users.</p>
         <p>{error.message}</p>
       </div>
     );
