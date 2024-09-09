@@ -1,11 +1,11 @@
-import { clearCoockie } from "./auth";
+import { clearCookie } from "./auth"; // Typo fix
 
 const fetchSecure = async (url, method = "GET", body = null) => {
   const fetchOptions = {
     method,
     mode: "cors",
     cache: "no-cache",
-    credentials: "include",
+    credentials: "include", // Ensures cookies are sent
     headers: {
       "Content-Type": "application/json",
     },
@@ -20,15 +20,19 @@ const fetchSecure = async (url, method = "GET", body = null) => {
     );
 
     if (response.status === 401 || response.status === 403) {
-      await clearCoockie();
+      await clearCookie(); // Fixed typo
 
-      // throw new Error('Unauthorized');
+      // Redirect or handle unauthorized access
+      window.location.href = "/login"; // Redirect to login
+      return;
     }
 
     const contentType = response.headers.get("content-type");
     let data;
     if (contentType && contentType.includes("application/json")) {
       data = await response.json();
+    } else if (!contentType) {
+      throw new Error("No content-type provided in the response");
     } else {
       const text = await response.text();
       throw new Error(
@@ -43,7 +47,7 @@ const fetchSecure = async (url, method = "GET", body = null) => {
     return data;
   } catch (error) {
     console.error("Error in fetchSecure:", error.message);
-    throw error;
+    throw new Error("Something went wrong. Please try again later.");
   }
 };
 
