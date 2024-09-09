@@ -76,7 +76,7 @@ const ManageUserForAdmin = () => {
               <tbody className="backdrop-blur-sm bg-white/20">
                 {/* User data table row */}
                 {users &&
-                  users.map((user) => (
+                  users?.map((user) => (
                     <ManageUserDataRow
                       refetch={refetch}
                       key={user._id}
