@@ -14,15 +14,28 @@ const ManageUserForAdmin = () => {
   const {
     data: users = [],
     isLoading,
+    isError,
+    error,
     refetch,
   } = useQuery({
     queryKey: ["users"],
     enabled: !loading,
     queryFn: async () => await getAllUsers(),
+    retry: 2,
   });
 
   if (isLoading) {
     return <Loader />;
+  }
+
+  // Display an error message if there's an issue with fetching
+  if (isError) {
+    return (
+      <div className="flex justify-center items-center flex-col text-2xl md:text-3xl lg:text-4xl text-center text-red-500">
+        <p>Failed to load users.</p>
+        <p>{error.message}</p>
+      </div>
+    );
   }
 
   return (
