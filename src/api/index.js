@@ -1,4 +1,4 @@
-import { clearCookie } from "./auth"; // Typo fix
+import { clearCoockie } from "./auth";
 
 const fetchSecure = async (url, method = "GET", body = null) => {
   const fetchOptions = {
@@ -20,7 +20,7 @@ const fetchSecure = async (url, method = "GET", body = null) => {
     );
 
     if (response.status === 401 || response.status === 403) {
-      await clearCookie(); // Fixed typo
+      await clearCoockie(); // Fixed typo
 
       // Redirect or handle unauthorized access
       window.location.href = "/login"; // Redirect to login
