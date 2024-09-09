@@ -26,6 +26,7 @@ const useGetAssignmentCountForTeacher = () => {
     queryKey: ["assignments"],
     queryFn: async () => await getAssignmentCount(user?.email),
     enabled: !loading && !!user?.email,
+    retry: 2,
   });
 
   return [assignments, isLoading];
@@ -37,6 +38,7 @@ const useGetCourseCount = () => {
     queryKey: ["courseCount"],
     queryFn: async () => await getTeacherCourseCount(user?.email),
     enabled: !loading && !!user?.email,
+    retry: 2,
   });
   return [courseCount, isLoading];
 };
@@ -47,6 +49,7 @@ const useGetEarningsHistoryForTeacher = () => {
     queryKey: ["earningsHistory"],
     queryFn: async () => await getEarningsHistory(user?.email),
     enabled: !loading && !!user?.email,
+    retry: 2,
   });
   console.log(earningsHistory?.earningsHistory);
   return [earningsHistory, isLoading];
@@ -58,6 +61,7 @@ const useGetTeacherEarnings = () => {
     queryKey: ["earnings"],
     queryFn: async () => await getTeacherEarnings(user?.email),
     enabled: !loading && !!user?.email,
+    retry: 2,
   });
   return [totalEarnings, isLoading];
 };
@@ -68,6 +72,7 @@ const useGetTotalStudentFotTeacher = () => {
     queryKey: ["studentCount"],
     queryFn: async () => await getStudentCountForTeacher(user?.email),
     enabled: !loading && !!user?.email,
+    retry: 2,
   });
 
   return [studentCount, isLoading];
@@ -81,6 +86,7 @@ const useGetAssignmentMarks = () => {
     queryKey: ["assignmentMarks"],
     queryFn: async () => await getAssignmentMarks(user?.email),
     enabled: !loading && !!user?.email,
+    retry: 2,
   });
 
   return [marksDistribution, isLoading];
@@ -91,6 +97,7 @@ const useGetPurchasedCourseCount = () => {
     queryKey: ["purchasedCourseCount"],
     queryFn: async () => await getStudentCourseCount(user?.email),
     enabled: !loading && !!user?.email,
+    retry: 2,
   });
 
   return [courseCount, isLoading];
@@ -102,6 +109,7 @@ const useGetSubmittedAssignmentCount = () => {
     queryKey: ["submittedAssignmentCount"],
     queryFn: async () => await getSubmittedAssignmetCount(user?.email),
     enabled: !loading && !!user?.email,
+    retry: 2,
   });
 
   return [assignmentCount, isLoading];
@@ -113,6 +121,7 @@ const useGetAverageAssignmentMark = () => {
     queryKey: ["averageAssignmentMark"],
     queryFn: async () => await getAverageAssignmentMark(user?.email),
     enabled: !loading && !!user?.email,
+    retry: 2,
   });
   console.log(averageMark);
   return [averageMark, isLoading];
@@ -124,6 +133,7 @@ const useAdmissionsCourses = (email) => {
     queryKey: ["admissionsCourses"],
     queryFn: async () => await admissionsCourses(user?.email),
     enabled: !loading && !!user?.email,
+    retry: 2,
   });
   console.log(addmisionscourses);
   return [addmisionscourses, isLoading];
@@ -136,6 +146,7 @@ const useAdmissionsCourses = (email) => {
 //     queryKey: ["userDetails", user?.email],
 //     queryFn: async () => await getUserDetail(user?.email),
 //     enabled: !loading && !!user?.email,
+
 //   });
 //   console.log(userDetails);
 //   return [userDetails, isLoading];
@@ -148,6 +159,7 @@ const useGetTotalUsers = () => {
     queryKey: ["users"],
     queryFn: async () => await getTotalUsers(),
     enabled: !loading && !!user?.email,
+    retry: 2,
   });
 
   return [users, isLoading]; // Ensure this returns an array
@@ -158,6 +170,7 @@ const useGetTotalCourses = () => {
     queryKey: ["courses"],
     queryFn: async () => await getTotalCourses(),
     enabled: !loading && !!user?.email,
+    retry: 2,
   });
 
   return [courses, isLoading]; // Ensure this returns an array
