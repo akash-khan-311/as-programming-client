@@ -17,6 +17,8 @@ const ManageUserDataRow = ({ user, refetch }) => {
       setIsOpen(false);
     }
   };
+
+  console.log(user);
   return (
     <>
       <tr>

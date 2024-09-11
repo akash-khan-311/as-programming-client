@@ -12,6 +12,7 @@ import {
   getTeacherCourseCount,
   getTeacherEarnings,
   getTotalCourses,
+  getTotalEarnings,
   getTotalTeachers,
   getTotalUsers,
 } from "@/api/api";
@@ -156,7 +157,7 @@ const useAdmissionsCourses = (email) => {
 const useGetTotalUsers = () => {
   const { user, loading } = useAuth();
   const { data: users, isLoading } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["usersCount"],
     queryFn: async () => await getTotalUsers(),
     enabled: !loading && !!user?.email,
     retry: 2,
@@ -167,7 +168,7 @@ const useGetTotalUsers = () => {
 const useGetTotalCourses = () => {
   const { user, loading } = useAuth();
   const { data: courses, isLoading } = useQuery({
-    queryKey: ["courses"],
+    queryKey: ["coursesCount"],
     queryFn: async () => await getTotalCourses(),
     enabled: !loading && !!user?.email,
     retry: 2,
@@ -176,12 +177,26 @@ const useGetTotalCourses = () => {
   return [courses, isLoading]; // Ensure this returns an array
 };
 const useGetTotalTeachers = () => {
+  const { user, loading } = useAuth();
   const { data: teachers, isLoading } = useQuery({
-    queryKey: ["teachers"],
+    queryKey: ["teachersCount"],
     queryFn: async () => await getTotalTeachers(),
+    enabled: !loading && !!user?.email,
+    retry: 2,
   });
 
   return [teachers, isLoading];
+};
+
+const useGetTotalEarningsForAdmin = () => {
+  const { user, loading } = useAuth();
+  const { data: earnings, isLoading } = useQuery({
+    queryKey: ["adminEarnings"],
+    queryFn: async () => await getTotalEarnings(),
+    enabled: !loading && !!user?.email,
+    retry: 2,
+  });
+  return [earnings, isLoading]; // Ensure this returns an array
 };
 export {
   useGetAssignmentCountForTeacher,
@@ -197,4 +212,5 @@ export {
   useAdmissionsCourses,
   useGetTotalCourses,
   useGetTotalTeachers,
+  useGetTotalEarningsForAdmin,
 };

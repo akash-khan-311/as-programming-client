@@ -20,7 +20,7 @@ const fetchSecure = async (url, method = "GET", body = null) => {
     );
 
     if (response.status === 401 || response.status === 403) {
-      await clearCoockie(); // Fixed typo
+      await clearCoockie();
 
       // Redirect or handle unauthorized access
       window.location.href = "/login"; // Redirect to login
