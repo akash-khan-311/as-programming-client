@@ -31,7 +31,7 @@ const AdminStatistics = () => {
           <span className="flex justify-center items-center">
             <div className="w-10 h-10 bg-gray-300 rounded-full animate-pulse"></div>
           </span>
-          <div className="mt-3 space-y-2">
+          <div className="mt-3 space-y-2 py-2">
             <div className="w-20 h-10 bg-gray-300 animate-pulse"></div>
             <div className="w-32 h-6 bg-gray-300 animate-pulse"></div>
           </div>
@@ -40,7 +40,7 @@ const AdminStatistics = () => {
           <span className="flex justify-center items-center">
             <div className="w-10 h-10 bg-gray-300 rounded-full animate-pulse"></div>
           </span>
-          <div className="mt-3 space-y-2">
+          <div className="mt-3 space-y-2 py-2">
             <div className="w-20 h-10 bg-gray-300 animate-pulse"></div>
             <div className="w-32 h-6 bg-gray-300 animate-pulse"></div>
           </div>
@@ -49,7 +49,7 @@ const AdminStatistics = () => {
           <span className="flex justify-center items-center">
             <div className="w-10 h-10 bg-gray-300 rounded-full animate-pulse"></div>
           </span>
-          <div className="mt-3 space-y-2">
+          <div className="mt-3 space-y-2 py-2">
             <div className="w-20 h-10 bg-gray-300 animate-pulse"></div>
             <div className="w-32 h-6 bg-gray-300 animate-pulse"></div>
           </div>
@@ -58,7 +58,7 @@ const AdminStatistics = () => {
           <span className="flex justify-center items-center">
             <div className="w-10 h-10 bg-gray-300 rounded-full animate-pulse"></div>
           </span>
-          <div className="mt-3 space-y-2">
+          <div className="mt-3 space-y-2 py-2">
             <div className="w-20 h-10 bg-gray-300 animate-pulse"></div>
             <div className="w-32 h-6 bg-gray-300 animate-pulse"></div>
           </div>

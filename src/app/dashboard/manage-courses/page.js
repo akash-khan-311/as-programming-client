@@ -1,5 +1,7 @@
 import { getCoursesForTeacher } from "@/api/courses";
 import ManageCoursesForTeacher from "@/components/Dashboard/ManageCoursesForTeacher/ManageCoursesForTeacher";
+import Loader from "@/components/Shared/Loader";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Manage Courses | Dashbaord",
@@ -21,7 +23,9 @@ export const metadata = {
 const ManageCoursePage = () => {
   return (
     <>
-      <ManageCoursesForTeacher />
+      <Suspense fallback={<Loader />}>
+        <ManageCoursesForTeacher />
+      </Suspense>
     </>
   );
 };

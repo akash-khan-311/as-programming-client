@@ -1,6 +1,9 @@
 import MenuItem from "../MenuItem/MenuItem";
 import { BsGraphUp } from "react-icons/bs";
 import { FaUserCog } from "react-icons/fa";
+import { MdManageHistory } from "react-icons/md";
+import { MdPayment } from "react-icons/md";
+
 const AdminMenu = () => {
   return (
     <>
@@ -11,12 +14,12 @@ const AdminMenu = () => {
         path="/dashboard/manage-user"
       />
       <MenuItem
-        icon={FaUserCog}
+        icon={MdManageHistory}
         label="Manage Course"
         path="/dashboard/manage-course"
       />
       <MenuItem
-        icon={FaUserCog}
+        icon={MdPayment}
         label="Payment Info"
         path="/dashboard/payment"
       />
