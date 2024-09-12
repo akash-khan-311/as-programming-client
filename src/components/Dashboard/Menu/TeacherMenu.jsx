@@ -1,6 +1,12 @@
 import MenuItem from "../MenuItem/MenuItem";
 import { BsGraphUp, BsHouseAddFill } from "react-icons/bs";
-import { MdHomeWork, MdOutlineManageHistory } from "react-icons/md";
+import {
+  MdAssignment,
+  MdHomeWork,
+  MdOutlineManageHistory,
+} from "react-icons/md";
+import { BiSolidMessageSquareAdd } from "react-icons/bi";
+
 const TeacherMenu = () => {
   return (
     <>
@@ -10,7 +16,7 @@ const TeacherMenu = () => {
       <MenuItem
         label="Add Course"
         path="/dashboard/add-course"
-        icon={BsHouseAddFill}
+        icon={BiSolidMessageSquareAdd}
       />
       <MenuItem
         label="My Courses"
@@ -25,7 +31,7 @@ const TeacherMenu = () => {
       <MenuItem
         label="Assignments"
         path="/dashboard/tassignments"
-        icon={MdOutlineManageHistory}
+        icon={MdAssignment}
       />
     </>
   );
