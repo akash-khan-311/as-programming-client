@@ -26,7 +26,7 @@ const BeInstructor = () => {
               Instructors From Around The World Teach Millions Of Learners On
               Online . We Provide Tools And Skills To Teach You Love
             </p>
-            <Link className="btn py-2 px-10" href="/teach">
+            <Link className="btn py-2 px-10" href="/dashboard">
               Start Teaching Today
             </Link>
           </div>

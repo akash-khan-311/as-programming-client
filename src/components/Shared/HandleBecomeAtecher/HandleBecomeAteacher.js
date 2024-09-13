@@ -1,19 +1,14 @@
 import {
   Button,
-  Description,
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
 import { useState } from "react";
-import { PulseLoader } from "react-spinners";
-import Swal from "sweetalert2";
 
 const HandleBecomeAteacher = ({ style, label }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
 
   function open() {
     setIsOpen(true);
@@ -57,11 +52,8 @@ const HandleBecomeAteacher = ({ style, label }) => {
                 </li>
               </ul>
               <div className="mt-4">
-                <Button
-                  className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
-                  onClick={close}
-                >
-                  Got it, thanks!
+                <Button className="btn text-white py-1 px-4" onClick={close}>
+                  Got it, Thanks!
                 </Button>
               </div>
             </DialogPanel>
