@@ -1,0 +1,30 @@
+# Exported from Render on 2024-09-13T04:55:01Z
+services:
+  - type: web
+    name: as-programming-client
+    runtime: node
+    repo: https://github.com/akash-khan-311/as-programming-client
+    plan: free
+    envVars:
+      - key: NEXT_PUBLIC_BASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_IMAGE_BB_API_KEY
+        sync: false
+      - key: NEXT_PUBLIC_appId
+        sync: false
+      - key: NEXT_PUBLIC_messagingSenderId
+        sync: false
+      - key: NEXT_PUBLIC_storageBucket
+        sync: false
+      - key: NEXT_PUBLIC_projectId
+        sync: false
+      - key: NEXT_PUBLIC_authDomain
+        sync: false
+      - key: NEXT_PUBLIC_apiKey
+        sync: false
+      - key: PORT
+        sync: false
+    region: oregon
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+version: "1"
