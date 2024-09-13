@@ -6,12 +6,16 @@ import Features from "@/components/Home/Features/Features";
 import HeroSection from "@/components/Home/HeroSection";
 import Subscribe from "@/components/Home/Subscribe/Subscribe";
 import Loader from "@/components/Shared/Loader";
+import Head from "next/head";
 import { Suspense } from "react";
 
 export default function Home() {
   return (
     // <Suspense fallback={<Loader />}>
     <>
+      <Head>
+        <link rel="icon" href="/public/favicon.ico" />
+      </Head>
       <HeroSection />
       <Features />
       <About />
