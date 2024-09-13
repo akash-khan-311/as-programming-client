@@ -11,6 +11,7 @@ import {
   FaMoneyBillWave,
 } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa6";
+import EarningChart from "./Admin/EarningChart";
 
 const AdminStatistics = () => {
   const [users, isLoadingUsers] = useGetTotalUsers();
@@ -97,6 +98,7 @@ const AdminStatistics = () => {
           icon={FaMoneyBillWave}
         />
       </div>
+      <EarningChart />
     </div>
   );
 };
