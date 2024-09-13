@@ -25,7 +25,7 @@ const HandleBecomeAteacher = ({ style, label }) => {
   return (
     <>
       <button className={style} onClick={() => setIsOpen(true)}>
-        Open dialog
+        Become A Instructor
       </button>
 
       <Dialog
@@ -43,14 +43,19 @@ const HandleBecomeAteacher = ({ style, label }) => {
             >
               <DialogTitle
                 as="h3"
-                className="text-base/7 font-medium text-white"
+                className="text-xl md:text-2xl lg:text-3xl font-medium text-white"
               >
                 Become A Instructor
               </DialogTitle>
-              <p className="mt-2 text-sm/6 text-white/50">
-                Your payment has been successfully submitted. We’ve sent you an
-                email with all of the details of your order.
+              <p className="text-white my-2">
+                If You Want to be an Instructor! You can Send Your
+                Qualifications This Email
               </p>
+              <ul>
+                <li className="text-pink-500 font-semibold">
+                  asprogramming@hr.com
+                </li>
+              </ul>
               <div className="mt-4">
                 <Button
                   className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
